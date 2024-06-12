@@ -1,0 +1,105 @@
+# Part 1
+
+## 1.01 logoutput
+[Source code](Exercise1.01/)
+
+Commands
+```console
+$ docker build . -t logoutput
+$ docker tag logoutput sushashu/logoutput:1.01
+$ docker push sushashu/logoutput:1.01
+$ k3d cluster create -a 2
+$ kubectl create deployment logoutput --image=sushashu/logoutput:1.01
+$ kubectl get pods
+$ kubectl logs logoutput-75684dbfdf-x45lh
+```
+
+Output
+```console
+$ kubectl logs logoutput-75684dbfdf-x45lh
+
+    > logoutput@1.0.0 start
+    > node index.js
+
+    2024-06-12T11:50:12.647Z: slh5mhm2-1aue-vcoi-dd9k-yfow-moox6v0kah
+    2024-06-12T11:50:17.657Z: slh5mhm2-1aue-vcoi-dd9k-yfow-moox6v0kah
+    2024-06-12T11:50:22.659Z: slh5mhm2-1aue-vcoi-dd9k-yfow-moox6v0kah
+    2024-06-12T11:50:27.660Z: slh5mhm2-1aue-vcoi-dd9k-yfow-moox6v0kah
+    2024-06-12T11:50:32.666Z: slh5mhm2-1aue-vcoi-dd9k-yfow-moox6v0kah
+    2024-06-12T11:50:37.669Z: slh5mhm2-1aue-vcoi-dd9k-yfow-moox6v0kah
+```
+
+## 1.02 project v0.1
+[Source code](/Part1/Exercise1.02/)
+
+Commands
+```console
+$ docker build . -t project
+$ docker tag project sushashu/project:v0.1
+$ docker push sushashu/project:v0.1
+$ k3d cluster create -a 2
+$ kubectl create deployment project --image=sushashu/project:v0.1
+$ kubectl get pods
+$ kubectl logs project-5c76c9c86-vhbzf
+```
+
+Output
+```console
+$ kubectl logs project-5c76c9c86-vhbzf
+    > project@1.0.0 start
+    > node index.js
+
+    Server started in port undefined
+```
+
+## 1.03 logoutput
+
+[Source code](/Part1/Exercise1.03/)
+
+Commands
+```console
+$ k3d cluster create -a 2
+$ kubectl apply -f manifests
+$ kubectl get pods
+$ kubectl logs logoutput-75684dbfdf-mpzlj
+```
+
+Output
+```console
+$ kubectl logs logoutput-75684dbfdf-mpzlj
+
+    > logoutput@1.0.0 start
+    > node index.js
+
+    2024-06-12T12:54:00.465Z: 0094gwz1-bvuf-nm8k-u2dz-839p-hv263eg2ldk
+    2024-06-12T12:54:05.472Z: 0094gwz1-bvuf-nm8k-u2dz-839p-hv263eg2ldk
+    2024-06-12T12:54:10.476Z: 0094gwz1-bvuf-nm8k-u2dz-839p-hv263eg2ldk
+```
+
+## 1.04 project v0.2
+
+[Source code](/Part1/Exercise1.04/)
+
+Commands
+```console
+$ k3d cluster create -a 2
+$ kubectl apply -f manifests
+$ kubectl get pods
+$ kubectl logs project-5c76c9c86-9l5dt
+```
+
+Output
+```console
+$ kubectl logs project-5c76c9c86-9l5dt
+
+    > project@1.0.0 start
+    > node index.js
+
+    Server started in port undefined
+```
+
+## Notes
+LENS in Windows and k3d in WSL, *kubeconfig* issue :
+ - If k3d is in WSL and you want to run Lens in Windows, create a symlink from WSL to Windows with (Powershell as admin):
+
+     `New-Item -ItemType SymbolicLink -Path "C:\Users\USERNAME\.kube" -Target "\\wsl$\Ubuntu\home\USERNAME\.kube"`

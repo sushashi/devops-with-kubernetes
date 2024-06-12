@@ -98,6 +98,39 @@ $ kubectl logs project-5c76c9c86-9l5dt
     Server started in port undefined
 ```
 
+## 1.05 project v0.3
+
+[Source code](/Part1/Exercise1.05/)
+
+Commands
+```console
+$ docker build . -t project:v0.3
+$ docker tag project:v0.3 sushashu/project:v0.3
+$ docker push sushashu/project:v0.3
+$ k3d cluster create -a 2
+$ kubectl apply -f manifests
+$ kubectl get pods
+$ kubectl logs project-5d76f54684-ksk8s
+$ kubectl port-forward project-5d76f54684-ksk8s 3003:3000
+```
+Then visit `http://localhost:3003/`
+
+Output
+```console
+$ kubectl logs project-5d76f54684-ksk8s
+
+    > project@1.0.0 start
+    > node index.js
+
+    Server started in port 3000
+
+$ kubectl port-forward project-5d76f54684-ksk8s 3003:3000
+    Forwarding from 127.0.0.1:3003 -> 3000
+    Forwarding from [::1]:3003 -> 3000
+    Handling connection for 3003
+    Handling connection for 3003
+```
+
 ## Notes
 LENS in Windows and k3d in WSL, *kubeconfig* issue :
  - If k3d is in WSL and you want to run Lens in Windows, create a symlink from WSL to Windows with (Powershell as admin):

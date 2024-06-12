@@ -131,6 +131,18 @@ $ kubectl port-forward project-5d76f54684-ksk8s 3003:3000
     Handling connection for 3003
 ```
 
+## 1.06 project v0.4
+
+[Source code](/Part1/Exercise1.06/)
+
+Commands
+```console
+$ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
+$ kubectl apply -f manifests
+```
+
+Then visit `http://localhost:8082/`
+
 ## Notes
 LENS in Windows and k3d in WSL, *kubeconfig* issue :
  - If k3d is in WSL and you want to run Lens in Windows, create a symlink from WSL to Windows with (Powershell as admin):

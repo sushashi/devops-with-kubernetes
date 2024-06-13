@@ -113,7 +113,7 @@ $ kubectl get pods
 $ kubectl logs project-5d76f54684-ksk8s
 $ kubectl port-forward project-5d76f54684-ksk8s 3003:3000
 ```
-Then visit `http://localhost:3003/`
+Then visit http://localhost:3003/
 
 Output
 ```console
@@ -141,18 +141,47 @@ $ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 
 $ kubectl apply -f manifests
 ```
 
-Then visit `http://localhost:8082/`
+Then visit http://localhost:8082/
 
 ## 1.07 logoutput
 
 [Source code](/Part1/Exercise1.07/)
 
+Commands
 ```console
 $ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
 $ kubectl apply -f manifests
 ```
 
-Then visit `http://localhost:8081/`
+Then visit http://localhost:8081/
+
+## 1.08 project v0.5
+
+[Source code](/Part1/Exercise1.08/)
+
+Commands
+```console
+$ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
+$ kubectl apply -f manifests
+```
+Then visit http://localhost:8081/
+
+## 1.09 pingpong
+
+[Source code](/Part1/Exercise1.09/)
+
+Deploy `project v0.5` as in exercise 1.08
+
+Then deploy `pingpong` with command
+```console
+$ kubectl apply -f manifests`
+```
+
+Then visit:
+- http://localhost:8081/ and 
+- http://localhost:8081/pingpong
+
+Note to self: path in `index.js` and `ingress.yaml` has to match
 
 ## Notes
 LENS in Windows and k3d in WSL, *kubeconfig* issue :

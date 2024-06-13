@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: splitted-logoutput
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logoutput
+  template:
+    metadata:
+      labels:
+        app: logoutput
+    spec:
+      volumes: # Define volume
+        - name: shared-log
+          emptyDir: {}
+      containers:
+        - name: logoutput-writer
+          image: sushashu/logoutput-writer
+          volumeMounts: # Mount volume
+          - name: shared-log
+            mountPath: /usr/src/app/files
+        - name: logoutput-reader
+          image: sushashu/logoutput-reader
+          env:
+            - name: PORT
+              value: "3000"
+          volumeMounts: # Mount volume
+          - name: shared-log
+            mountPath: /usr/src/app/files
+          

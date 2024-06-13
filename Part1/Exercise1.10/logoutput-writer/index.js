@@ -1,7 +1,4 @@
-const express = require('express')
-const app = express()
-
-PORT = process.env.PORT || "3333"
+const fs = require('fs')
 
 const generateString = () => {
     let str =  Math.random().toString(36).slice(2, 10);
@@ -15,7 +12,20 @@ const generateString = () => {
 
 const printOut = (str) => {
     date = new Date().toISOString()
-    console.log(date + ": " + str)
+    string_toWrite = date + ": " + str
+
+    dir = './files'
+    if(!fs.existsSync(dir)){
+        fs.mkdirSync(dir)
+    }
+
+    fs.writeFile(dir + "/text.txt", string_toWrite, err => {
+        if (err) {
+            console.log("Error writing data")
+        } else {
+            console.log("Successfully written")
+        }
+    } )
 }
 
 string_mem = generateString()
@@ -28,15 +38,5 @@ const run = () => {
         printOut(str)
     }, 5000)
 }
-
-app.get("/", (req, res) => {
-    timestamp = new Date().toISOString()
-    stringout = string_mem
-    res.send(timestamp + ": " + stringout)
-})
-
-app.listen(PORT, () => {
-    console.log("Server started on port", PORT)
-})
 
 run()

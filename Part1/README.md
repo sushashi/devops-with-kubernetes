@@ -49,7 +49,7 @@ $ kubectl logs project-5c76c9c86-vhbzf
     > project@1.0.0 start
     > node index.js
 
-    Server started in port undefined
+    Server started on port undefined
 ```
 
 ## 1.03 logoutput
@@ -95,7 +95,7 @@ $ kubectl logs project-5c76c9c86-9l5dt
     > project@1.0.0 start
     > node index.js
 
-    Server started in port undefined
+    Server started on port undefined
 ```
 
 ## 1.05 project v0.3
@@ -122,7 +122,7 @@ $ kubectl logs project-5d76f54684-ksk8s
     > project@1.0.0 start
     > node index.js
 
-    Server started in port 3000
+    Server started on port 3000
 
 $ kubectl port-forward project-5d76f54684-ksk8s 3003:3000
     Forwarding from 127.0.0.1:3003 -> 3000
@@ -182,6 +182,45 @@ Then visit:
 - http://localhost:8081/pingpong
 
 Note to self: path in `index.js` and `ingress.yaml` has to match
+
+## 1.10 logoutput
+[Source code](/Part1/Exercise1.10/)
+
+First build and push images on Docker Hub
+
+Commands
+```console
+$ kubectl apply -f manifests
+$ kubectl get pods
+$ kubectl logs splitted-logoutput-5c64b4b58-nndds --all-containers=true
+```
+Output
+```console
+$ kubectl logs splitted-logoutput-5c64b4b58-nndds --all-containers=true
+
+    > logoutput-writer@1.0.0 start
+    > node index.js
+
+    Successfully written
+    Successfully written
+    Successfully written
+    Successfully written
+    Successfully written
+    Successfully written
+
+    > logoutput-reader@1.0.0 start
+    > node index.js
+
+    Reader Server started on port 3000
+    mcmnq5 - 2024-06-13T11:57:05.115Z: lqh8x28z-c62a-xnej-d600-kljp-z6odzaryijh
+    6y34zh - 2024-06-13T11:57:10.120Z: lqh8x28z-c62a-xnej-d600-kljp-z6odzaryijh
+    kvk7mi - 2024-06-13T11:57:15.125Z: lqh8x28z-c62a-xnej-d600-kljp-z6odzaryijh
+    kruisj - 2024-06-13T11:57:20.129Z: lqh8x28z-c62a-xnej-d600-kljp-z6odzaryijh
+    4fj30b - 2024-06-13T11:57:25.135Z: lqh8x28z-c62a-xnej-d600-kljp-z6odzaryijh
+    dzbjpd - 2024-06-13T11:57:30.141Z: lqh8x28z-c62a-xnej-d600-kljp-z6odzaryijh
+```
+
+Then visit http://localhost:8081/
 
 ## Notes
 LENS in Windows and k3d in WSL, *kubeconfig* issue :

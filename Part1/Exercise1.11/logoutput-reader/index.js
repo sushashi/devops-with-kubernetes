@@ -8,7 +8,7 @@ let theString
 let counterPong
 
 const getString = () => {
-    fs.readFile('./files/text.txt', (err, data) => {
+    fs.readFile('./files/text.txt', "utf8", (err, data) => {
         if(err){
             console.log("Error reading data")
             return;

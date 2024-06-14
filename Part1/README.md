@@ -237,6 +237,30 @@ Then visit
 - http://localhost:8081/pingpong to increase pong counter
 - http://localhost:8081 to display timestamp hash and pong counter
 
+## 1.12 project v0.6
+
+[Source code](/Part1/Exercise1.12/)
+
+Commands
+```console
+$ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
+$ docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube
+$ kubectl apply -f manifests
+```
+
+ 
+- Then visit http://localhost:8081 to fetch an image
+- Reloading the page wont change the image for 60 seconds
+- After 60 seconds reloading fetches a new image
+
+Test if the image persists with an undeployment and redeployment (within the 60 seconds interval) with the following command:
+
+
+```console
+$ kubectl delete -f manifests/deployment.yaml
+$ kubectl apply -f manifests/deployment.yaml
+```
+
 ## Notes
 LENS in Windows and k3d in WSL, *kubeconfig* issue :
  - If k3d is in WSL and you want to run Lens in Windows, create a symlink from WSL to Windows with (Powershell as admin):

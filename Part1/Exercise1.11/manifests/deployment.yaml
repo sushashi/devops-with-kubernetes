@@ -12,21 +12,21 @@ spec:
       labels:
         app: logoutput
     spec:
-      volumes: # Define volume
-        - name: shared-log
-          emptyDir: {}
+      volumes:
+        - name: shared-log-pong
+          persistentVolumeClaim:
+            claimName: image-claim
       containers:
         - name: logoutput-writer
           image: sushashu/logoutput-writer:1.10
           volumeMounts: # Mount volume
-          - name: shared-log
+          - name: shared-log-pong
             mountPath: /usr/src/app/files
         - name: logoutput-reader
-          image: sushashu/logoutput-reader:1.10
+          image: sushashu/logoutput-reader:1.11
           env:
             - name: PORT
               value: "3000"
           volumeMounts: # Mount volume
-          - name: shared-log
+          - name: shared-log-pong
             mountPath: /usr/src/app/files
-          

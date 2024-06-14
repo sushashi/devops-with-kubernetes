@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pingpong
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pingpong
+  template:
+    metadata:
+      labels:
+        app: pingpong
+    spec:
+      volumes:
+        - name: shared-log-pong
+          persistentVolumeClaim:
+            claimName: image-claim
+      containers:
+        - name: pingpong
+          image: sushashu/pingpong:1.11
+          env:
+            - name: PORT
+              value: "3000"
+          volumeMounts:
+          - name: shared-log-pong
+            mountPath: /usr/src/app/files

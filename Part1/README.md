@@ -222,6 +222,21 @@ $ kubectl logs splitted-logoutput-5c64b4b58-nndds --all-containers=true
 
 Then visit http://localhost:8081/
 
+## 1.11 pingpong & logoutput
+
+[Source code](/Part1/Exercise1.11/)
+
+Commands
+```console
+$ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
+$ docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube
+$ kubectl apply -f manifests
+```
+
+Then visit 
+- http://localhost:8081/pingpong to increase pong counter
+- http://localhost:8081 to display timestamp hash and pong counter
+
 ## Notes
 LENS in Windows and k3d in WSL, *kubeconfig* issue :
  - If k3d is in WSL and you want to run Lens in Windows, create a symlink from WSL to Windows with (Powershell as admin):

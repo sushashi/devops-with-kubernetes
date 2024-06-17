@@ -28,7 +28,7 @@ app.get("/", async (req, res) => {
     let howLong = await sinceLastTime()
     console.log(howLong + " seconds since last fetch")
 
-    if (howLong > 60 || !fs.existsSync('./files/image.jpg')){
+    if (howLong > 3600 || !fs.existsSync('./files/image.jpg')){
         await fetchImage()
     }
     res.sendFile('./static/index.html', {root: __dirname })

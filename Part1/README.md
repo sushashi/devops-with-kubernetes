@@ -249,11 +249,11 @@ $ kubectl apply -f manifests
 ```
 
  
-- Then visit http://localhost:8081 to fetch an image
-- Reloading the page wont change the image for 60 seconds
-- After 60 seconds reloading fetches a new image
+- Then visit http://localhost:8081
+- Reloading the page wont change the image for 60 minutes
+- After 60 minutes, reloading the page fetches a new image
 
-Test if the image persists with an undeployment and redeployment (within the 60 seconds interval) with the following command:
+Test if the image persists with an undeployment and redeployment (within the 60 minutes interval) with the following command:
 
 
 ```console

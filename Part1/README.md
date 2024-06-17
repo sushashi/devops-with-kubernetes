@@ -261,6 +261,13 @@ $ kubectl delete -f manifests/deployment.yaml
 $ kubectl apply -f manifests/deployment.yaml
 ```
 
+## 1.13 project v0.7
+
+[Source code](/Part1/Exercise1.13/)
+
+- Added form and hardcoded todo
+- Run as described in 1.12
+
 ## Notes
 LENS in Windows and k3d in WSL, *kubeconfig* issue :
  - If k3d is in WSL and you want to run Lens in Windows, create a symlink from WSL to Windows with (Powershell as admin):

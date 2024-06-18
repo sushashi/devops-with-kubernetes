@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: project
+  name: project-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: project
+  template:
+    metadata:
+      labels:
+        app: project
+    spec:
+      volumes:
+        - name: files-storage
+          persistentVolumeClaim:
+            claimName: project-claim
+      containers:
+        - name: project
+          image: sushashu/project:v1.0
+          volumeMounts:
+          - name: files-storage
+            mountPath: /usr/src/app/files
+          env:
+            - name: PORT
+              value: "3000"

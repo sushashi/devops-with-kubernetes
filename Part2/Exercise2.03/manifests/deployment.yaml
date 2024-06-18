@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: logoutput-pingpong
+  name: splitted-logoutput
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logoutput
+  template:
+    metadata:
+      labels:
+        app: logoutput
+    spec:
+      volumes:
+        - name: shared-log-pong
+          persistentVolumeClaim:
+            claimName: image-claim
+      containers:
+        - name: logoutput-writer
+          image: sushashu/logoutput-writer:1.10
+          volumeMounts: # Mount volume
+          - name: shared-log-pong
+            mountPath: /usr/src/app/files
+        - name: logoutput-reader
+          image: sushashu/logoutput-reader:2.01
+          env:
+            - name: PORT
+              value: "3000"
+          volumeMounts: # Mount volume
+          - name: shared-log-pong
+            mountPath: /usr/src/app/files

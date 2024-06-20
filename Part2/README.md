@@ -46,7 +46,7 @@ $ kubectl create namespace logoutput-pingpong
 $ kubectl apply -f manifests
 ```
 
-## 2.04 project
+## 2.04 project v.1.1
 [Source code](/Part2/Exercise2.04/)
 
 Commands
@@ -99,6 +99,51 @@ $ docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube1
 $ docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube2
 $ kubectl create namespace logoutput-pingpong
 $ kubectl apply -f manifests
+```
+
+## 2.07 logoutput & pingpong & postgres
+
+[Source code](/Part2/Exercise2.07/)
+
+Commands
+```console
+$ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
+$ docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube
+$ kubectl create namespace logoutput-pingpong
+$ kubectl apply -f manifests
+```
+
+Decrypt secrets env variables and apply:
+```console
+$ export SOPS_AGE_KEY_FILE=$(pwd)/key.txt
+$ sops --decrypt secret.enc.yaml | kubectl apply -f -
+```
+Note: secret env was `user = postgres, pass = test`
+
+## 2.08 project v1.2
+
+[Source code](/Part2/Exercise2.08/)
+
+Commands
+```console
+$ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
+$ docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube
+$ kubectl create namespace project
+$ kubectl apply -f manifests
+```
+
+Decrypt secrets env variables and apply:
+```console
+$ export SOPS_AGE_KEY_FILE=$(pwd)/key.txt
+$ sops --decrypt secret.enc.yaml | kubectl apply -f -
+```
+Note: secret env was `user = postgres, pass = test`
+
+For testing the containerization of the postgres database
+```console
+$ docker build . -t sushashu/todo-db:2.08
+$ docker run -d --name todo-db-container -e POSTGRES_PASSWORD=test -p 5432:5432 sushashu/todo-db:2.08
+$ psql postgres://postgres:test@127.0.0.1:5432
 ```
 
 ## Notes

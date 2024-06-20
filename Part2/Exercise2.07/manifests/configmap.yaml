@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: logoutput-pingpong
+  name: example-configmap
+data:
+  information.txt: |
+    This is a NEW wonderful message live from information.txt
+  MESSAGE: "NEW hello world from env" 
+

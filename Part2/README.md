@@ -146,6 +146,13 @@ $ docker run -d --name todo-db-container -e POSTGRES_PASSWORD=test -p 5432:5432 
 $ psql postgres://postgres:test@127.0.0.1:5432
 ```
 
+## 2.09 project
+
+[Source code](/Part2/Exercise2.09/)
+
+- Same commands as in 2.08
+- CronJob added
+
 ## Notes
 
 - `sudo snap install kubectx --classic` to install kubectx in WSL

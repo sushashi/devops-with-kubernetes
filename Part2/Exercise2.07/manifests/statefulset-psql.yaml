@@ -5,7 +5,7 @@ metadata:
   name: psql-stset
 spec:
   serviceName: psql-svc
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: psql

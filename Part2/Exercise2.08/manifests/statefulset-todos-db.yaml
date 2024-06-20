@@ -5,7 +5,7 @@ metadata:
   name: todo-db-stset
 spec:
   serviceName: todo-db-svc
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: todo-db
@@ -22,7 +22,7 @@ spec:
               containerPort: 5432
           volumeMounts:
             - name: todo-db-storage
-              mountPath: /data/pgdata
+              mountPath: /data
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:

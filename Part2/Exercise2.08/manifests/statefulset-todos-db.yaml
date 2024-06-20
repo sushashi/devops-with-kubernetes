@@ -22,7 +22,7 @@ spec:
               containerPort: 5432
           volumeMounts:
             - name: todo-db-storage
-              mountPath: /data
+              mountPath: /data/pgdata
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:

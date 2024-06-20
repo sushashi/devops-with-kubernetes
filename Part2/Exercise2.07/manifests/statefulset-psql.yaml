@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata: 
+  namespace: logoutput-pingpong
+  name: psql-stset
+spec:
+  serviceName: psql-svc
+  replicas: 2
+  selector:
+    matchLabels:
+      app: psql
+  template:
+    metadata:
+      labels:
+        app: psql
+    spec:
+      containers:
+        - name: psql
+          image: sushashu/pingpong-db:2.07
+          ports:
+            - name: psql
+              containerPort: 5432
+          volumeMounts:
+            - name: psql-data-storage
+              mountPath: /data
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database-secrets
+                  key: DATABASE-PASSWORD
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: database-secrets
+                  key: DATABASE-USER           
+            - name: PGDATA
+              value: /data/pgdata
+  volumeClaimTemplates:
+    - metadata:
+        name: psql-data-storage
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: local-path
+        resources:
+          requests:
+            storage: 100Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: logoutput-pingpong
+  name: psql-svc
+  labels:
+    app: psql
+spec:
+  ports:
+  - port: 5432
+    name: psql
+  clusterIP: None
+  selector:
+    app: psql

@@ -43,3 +43,21 @@
 - Wait **5 minutes** !
 - Visit http://{Ingress ip address}/pingpong 
 - visit http://{Ingress ip address}
+
+## 3.03 Project v1.4
+
+[Source code](/Part3/Exercise3.03/)
+
+[Github Actions](/.github/workflows/main-example.yaml)
+
+
+
+## Notes
+
+- Service Account Key of Google Cloud Services:
+    - Follow this guide : [here](https://cloud.google.com/iam/docs/keys-create-delete)
+    - Create a service account for GKE called 'github-actions' for the project [here](https://console.cloud.google.com/projectselector2/iam-admin/serviceaccounts?supportedpurview=project)
+    - Create the Key with gcloud (.json file):
+        ```console
+        $ gcloud iam service-accounts keys create ./private-key.json --iam-account=github-actions@<PROJECT-NAME-ID>.iam.gserviceaccount.com
+        ```

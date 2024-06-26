@@ -2,6 +2,8 @@ name: Release application
 
 on:
   push:
+    paths:
+      - 'Part3/Deployment-Exple/**'
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}

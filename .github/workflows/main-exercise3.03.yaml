@@ -67,6 +67,5 @@ jobs:
           kustomize edit set image PROJECT/IMAGE/TODO-DB=gcr.io/$PROJECT_ID/$IMAGE/todo-db:$BRANCH-$GITHUB_SHA
           kustomize edit set image PROJECT/IMAGE/TODO-JOB=gcr.io/$PROJECT_ID/$IMAGE/todo-job:$BRANCH-$GITHUB_SHA
           kustomize build . | kubectl apply -f -
-          kubectl rollout status deployment $DEPLOYMENT
           kubectl get services -o wide
         working-directory: ./Part3/Exercise3.03

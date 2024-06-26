@@ -35,7 +35,7 @@ app.get("/count", async (req, res) => {
 })
 
 app.get("/", (_, res) => {
-    res.send("Pingy Pongy!")
+    res.send("Pingy Pongy! Testy")
 })
  
 app.listen(PORT, () => {

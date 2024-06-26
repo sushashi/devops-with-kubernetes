@@ -43,6 +43,7 @@ jobs:
         run: |-
           docker build --tag "gcr.io/$PROJECT_ID/$IMAGE:$BRANCH-$GITHUB_SHA" .
           docker push "gcr.io/$PROJECT_ID/$IMAGE:$BRANCH-$GITHUB_SHA"
+        working-directory: ./Part3/Deployment-Exple
 
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v2
@@ -53,3 +54,4 @@ jobs:
           kustomize build . | kubectl apply -f -
           kubectl rollout status deployment $DEPLOYMENT
           kubectl get services -o wide
+        working-directory: ./Part3/Deployment-Exple

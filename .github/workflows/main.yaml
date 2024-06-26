@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: /Part3/Deployment-Exple
+        working-directory: ./Part3/Deployment-Exple
 
 
     steps:

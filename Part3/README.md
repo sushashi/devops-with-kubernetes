@@ -54,6 +54,10 @@
 
 ## Notes
 
+- Delete cluster with:
+    ```console
+    $ gcloud container clusters delete dwk-cluster --zone=europe-north1-b
+    ```
 - Service Account Key of Google Cloud Services:
     - Follow this guide : [here](https://cloud.google.com/iam/docs/keys-create-delete)
     - Create a service account for GKE called 'github-actions' for the project [here](https://console.cloud.google.com/projectselector2/iam-admin/serviceaccounts?supportedpurview=project)

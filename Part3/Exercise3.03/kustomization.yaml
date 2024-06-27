@@ -7,7 +7,6 @@ resources:
   - manifests/deployment-todos-backend.yaml
   - manifests/ingress.yaml
   - manifests/statefulset-todos-db.yaml
-  - manifests/persistentvolumeclaim-db.yaml
   - manifests/persistentvolumeclaim.yaml
 images:
   - name: PROJECT/IMAGE/PROJECT

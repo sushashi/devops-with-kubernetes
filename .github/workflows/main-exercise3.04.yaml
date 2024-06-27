@@ -84,7 +84,7 @@ jobs:
         working-directory: ./Part3/Exercise3.04
 
       - name: Deploy if branch
-        if: ${{BRANCH != 'main'}} 
+        if: github.ref != 'refs/heads/main'
         run: |-
           kubectl create namespace ${GITHUB_REF#refs/heads/} || true
           kubectl config set-context --current --namespace=${GITHUB_REF#refs/heads/}
@@ -94,7 +94,7 @@ jobs:
         working-directory: ./Part3/Exercise3.04
 
       - name: Deploy if main
-        if: ${{BRANCH == 'main'}}
+        if: github.ref == 'refs/heads/main'
         run: |-
           kustomize build . | kubectl apply -f -
           kubectl get services -o wide

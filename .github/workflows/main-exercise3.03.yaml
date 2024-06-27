@@ -70,16 +70,24 @@ jobs:
           kubectl get services -o wide
         working-directory: ./Part3/Exercise3.03
       
-      - name: Decrypt Secret
-        uses: mildronize/actions-get-secret-sops@v1
-        id: sops
+      - name: Get SOPS secret
+        uses: nhedger/get-sops-secret@v1
         with:
-          path: "secret.enc.yaml"                     
-          property-path: ".scope_a.app_service.app1"              
-          decrypting-key: ${{ secrets.AGE_PRIVATE_KEY }}                 
-          sops-version: '3.7.2'
+          id: get-secret
+
+          # Path to the SOPS encrypted file that contains the secret.
+          # Required.
+          secrets-file: secret.enc.yaml
+
+          # Name of the secret to retrieve
+          # Required.
+          secret-name: my-secret
+
+          # AGE private key
+          # Required.
+          age-private-key: ${{ secrets.AGE_PRIVATE_KEY }}
 
       - name: Deploy Secret
         run: |-
-          echo "${{ steps.sops.outputs.secret }}" > secrets.yaml
+          echo "${{ steps.get-secret.outputs.secret }}" > secrets.yaml
           kubectl apply -f secrets.yaml

@@ -66,7 +66,7 @@
 #### Note to self: 
 - Namespace has to be in lowercase.
 
-# 3.05 Project v1.42
+## 3.05 Project v1.42
 [Source code (from 3.04)](/Part3/Exercise3.04/)
 
 [Github Actions workflow](/.github/workflows/delete-exercise3.05.yaml)

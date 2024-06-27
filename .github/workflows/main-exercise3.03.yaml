@@ -78,6 +78,6 @@ jobs:
 
       - name: Decrypt and deploy secrets
         run: |-
-          echo ${{ secrets.AGE_KEYS }} > keys.txt
+          echo "${{ secrets.AGE_KEYS }}" > keys.txt
           export SOPS_AGE_KEY_FILE=keys.txt
           sops --decrypt secret.enc.yaml | kubectl apply -f -

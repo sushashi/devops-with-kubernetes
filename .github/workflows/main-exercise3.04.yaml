@@ -69,7 +69,7 @@ jobs:
         run: |-
           echo "${{ secrets.AGE_KEYS }}" > keys.txt
           export SOPS_AGE_KEY_FILE=keys.txt
-          sops --decrypt -d secret.enc.yaml > /manifests/secret.yaml
+          sops --decrypt -d secret.enc.yaml > ./manifests/secret.yaml
         working-directory: ./Part3/Exercise3.04
 
       - name: Set up Kustomize

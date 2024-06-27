@@ -30,7 +30,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: project
+  namespace: default
   name: project-svc
 spec:
   type: NodePort

@@ -59,6 +59,19 @@ jobs:
           docker push "gcr.io/$PROJECT_ID/$IMAGE/todo-job:${GITHUB_REF#refs/heads/}-$GITHUB_SHA"
         working-directory: ./Part3/Exercise3.04
 
+      - name: Sops Binary Installer
+        uses: mdgreenwald/mozilla-sops-action@v1.6.0
+        with:
+          version: latest
+        id: install
+
+      - name: Decrypt secrets
+        run: |-
+          echo "${{ secrets.AGE_KEYS }}" > keys.txt
+          export SOPS_AGE_KEY_FILE=keys.txt
+          sops --decrypt -d secret.enc.yaml > /manifests/secret.yaml
+        working-directory: ./Part3/Exercise3.04
+
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v2
 
@@ -75,17 +88,3 @@ jobs:
           kubectl get services -o wide
         working-directory: ./Part3/Exercise3.04
 
-      - name: Sops Binary Installer
-        uses: mdgreenwald/mozilla-sops-action@v1.6.0
-        with:
-          version: latest
-        id: install
-
-      - name: Decrypt and deploy secrets
-        run: |-
-          echo "${{ secrets.AGE_KEYS }}" > keys.txt
-          export SOPS_AGE_KEY_FILE=keys.txt
-          sops --decrypt -d secret.enc.yaml > ./manifests/secret.yaml
-          kustomize edit set namespace ${GITHUB_REF#refs/heads/}
-          kubectl apply -f manifests/secret.yaml
-        working-directory: ./Part3/Exercise3.04

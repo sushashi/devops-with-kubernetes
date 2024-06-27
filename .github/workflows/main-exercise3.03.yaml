@@ -69,3 +69,17 @@ jobs:
           kustomize build . | kubectl apply -f -
           kubectl get services -o wide
         working-directory: ./Part3/Exercise3.03
+      
+      - name: Decrypt Secret
+        uses: mildronize/actions-get-secret-sops@v1
+        id: sops
+        with:
+          path: "secret.enc.yaml"                     
+          property-path: ".scope_a.app_service.app1"              
+          decrypting-key: ${{ secrets.AGE_PRIVATE_KEY }}                 
+          sops-version: '3.7.2'
+
+      - name: Deploy Secret
+        run: |-
+          echo "${{ steps.sops.outputs.secret }}" > secrets.yaml
+          kubectl apply -f secrets.yaml

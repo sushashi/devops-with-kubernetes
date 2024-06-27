@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Project</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+        <style>
+            body {
+              font-family: "Roboto", serif;
+              text-align: center;
+            }
+            .container {
+                margin: auto;
+                width: 300px;
+            }
+            
+            .container .left{
+                text-align: left
+            }
+        </style>
+    </head>
+
+    <body onload="getTodos()">
+        <div class="container">
+            <h2>Todo WHAT again</h2>
+            <img style="border-radius: 10px;" src="./image.jpg" alt="Some random image" width="100%">
+        </div>
+
+        <div class="container-left">
+            <input type="text" maxlength="140" style="width: 200px;" id="input-todo">       
+            <button id="create-btn">Create Todo</button>
+        </div>
+
+        <div class="container">
+            <ul class="left" id="todoList">
+            </ul>
+        </div>
+
+        <script>
+            document.getElementById("input-todo").addEventListener("keyup", (e) => {
+                if (e.keyCode === 13) {
+                    document.getElementById("create-btn").click()
+                }
+            })
+            document.getElementById("create-btn").addEventListener("click", addTodo)
+            
+            function addTodo() {
+                const ul = document.getElementById("todoList")
+                const text = document.getElementById("input-todo")
+                // console.log('added ', text.value)
+                if (text.value !== ""){
+                    fetch('/todos' , {
+                        method:'post',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            todo: text.value
+                        })
+                    })
+                    .then( response => {
+                        // console.log('response', response)
+                        const newTodo = document.createElement('li')
+                        newTodo.innerHTML = text.value
+                        text.value = ''
+                        ul.append(newTodo)
+                    })
+                }
+            }
+
+            function getTodos() {
+                // console.log('getting todos')
+                fetch('/todos')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('data', data)
+                    const ul = document.getElementById('todoList')
+                    data.todos.forEach(element => {
+                        let newli = document.createElement('li')
+                        newli.innerHTML = element
+                        ul.append(newli)
+                    });
+                })
+            }
+        </script>
+    </body>
+</html>

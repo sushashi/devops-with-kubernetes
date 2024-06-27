@@ -48,9 +48,18 @@
 
 [Source code](/Part3/Exercise3.03/)
 
-[Github Actions](/.github/workflows/main-example.yaml)
+[Github Actions workflow](/.github/workflows/main-exercise3.03.yaml)
 
+- Push to github and check github actions.
+- Wait 5-10min and visit http://{Ingress ip address}
 
+## 3.04 Project v1.41
+
+[Source code](/Part3/Exercise3.04/)
+
+[Github Actions workflow](/.github/workflows/main-exercise3.04.yaml)
+
+- 
 
 ## Notes
 

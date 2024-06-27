@@ -73,8 +73,6 @@ jobs:
       - name: Get SOPS secret
         uses: nhedger/get-sops-secret@v1
         with:
-          id: get-secret
-
           # Path to the SOPS encrypted file that contains the secret.
           # Required.
           secrets-file: secret.enc.yaml
@@ -85,7 +83,8 @@ jobs:
 
           # AGE private key
           # Required.
-          age-private-key: ${{ secrets.AGE_PRIVATE_KEY }}
+          age-key: ${{ secrets.AGE_PRIVATE_KEY }}
+          sops-version: latest
 
       - name: Deploy Secret
         run: |-

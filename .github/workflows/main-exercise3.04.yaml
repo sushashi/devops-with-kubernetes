@@ -75,15 +75,27 @@ jobs:
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v2
 
-      - name: Deploy
+      - name: Kustomize Set image
         run: |-
-          kubectl create namespace ${GITHUB_REF#refs/heads/} || true
-          kubectl config set-context --current --namespace=${GITHUB_REF#refs/heads/}
-          kustomize edit set namespace ${GITHUB_REF#refs/heads/}
           kustomize edit set image PROJECT/IMAGE/PROJECT=gcr.io/$PROJECT_ID/$IMAGE/project:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
           kustomize edit set image PROJECT/IMAGE/TODO-BACKEND=gcr.io/$PROJECT_ID/$IMAGE/todo-backend:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
           kustomize edit set image PROJECT/IMAGE/TODO-DB=gcr.io/$PROJECT_ID/$IMAGE/todo-db:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
           kustomize edit set image PROJECT/IMAGE/TODO-JOB=gcr.io/$PROJECT_ID/$IMAGE/todo-job:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
+        working-directory: ./Part3/Exercise3.04
+
+      - name: Deploy if branch
+        if: ${GITHUB_REF#refs/heads/} != 'main'
+        run: |-
+          kubectl create namespace ${GITHUB_REF#refs/heads/} || true
+          kubectl config set-context --current --namespace=${GITHUB_REF#refs/heads/}
+          kustomize edit set namespace ${GITHUB_REF#refs/heads/}
+          kustomize build . | kubectl apply -f -
+          kubectl get services -o wide
+        working-directory: ./Part3/Exercise3.04
+
+      - name: Deploy if main
+        if: ${GITHUB_REF#refs/heads/} == 'main'
+        run: |-
           kustomize build . | kubectl apply -f -
           kubectl get services -o wide
         working-directory: ./Part3/Exercise3.04

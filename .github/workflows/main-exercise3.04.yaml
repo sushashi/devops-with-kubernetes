@@ -85,5 +85,7 @@ jobs:
         run: |-
           echo "${{ secrets.AGE_KEYS }}" > keys.txt
           export SOPS_AGE_KEY_FILE=keys.txt
-          sops --decrypt secret.enc.yaml | kubectl apply -f -
+          sops --decrypt secret.enc.yaml > ./manifests/secret.yaml
+          kustomize edit set namespace ${GITHUB_REF#refs/heads/}
+          kubectl apply -f manifests/secret.yaml
         working-directory: ./Part3/Exercise3.04

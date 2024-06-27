@@ -13,7 +13,7 @@ env:
   GKE_ZONE: europe-north1-b
   IMAGE: dwk-project
   DEPLOYMENT: dwk-project
-  BRANCH: ${{ github.ref_name }}
+  BRANCH: ${{ github.event.ref }}
 
 jobs:
   delete-namespace:

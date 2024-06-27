@@ -51,7 +51,11 @@
 [Github Actions workflow](/.github/workflows/main-exercise3.03.yaml)
 
 - Push to github and check github actions.
-- Wait 5-10min and visit http://{Ingress ip address}
+- Wait 5-10min, run `kubectl get ing` and visit http://{Ingress ip address}
+
+#### Note to self:
+- Decrypt secret is placed before kustomize namespace in workflow.
+- `kustomization.yaml` includes `secret.yaml` in resources.
 
 ## 3.04 Project v1.41
 
@@ -59,7 +63,13 @@
 
 [Github Actions workflow](/.github/workflows/main-exercise3.04.yaml)
 
-- 
+#### Note to self: 
+- Namespace has to be in lowercase.
+
+# 3.05 Project v1.42
+[Source code (from 3.04)](/Part3/Exercise3.04/)
+
+[Github Actions workflow](/.github/workflows/delete-exercise3.05.yaml)
 
 ## Notes
 

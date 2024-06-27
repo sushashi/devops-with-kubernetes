@@ -78,5 +78,5 @@ jobs:
 
       - name: Decrypt and deploy secrets
         run: |-
-          export SOPS_AGE_KEY_FILE=${{ secrets.AGE_KEYS }}
+          export SOPS_AGE_KEY_FILE="${{ secrets.AGE_KEYS }}"
           sops --decrypt secret.enc.yaml | kubectl apply -f -

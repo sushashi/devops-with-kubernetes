@@ -69,7 +69,13 @@ jobs:
           kustomize build . | kubectl apply -f -
           kubectl get services -o wide
         working-directory: ./Part3/Exercise3.03
-      
+
+      - name: Sops Binary Installer
+        uses: mdgreenwald/mozilla-sops-action@v1.6.0
+        with:
+          version: latest
+        id: install
+
       - name: Get SOPS secret
         uses: nhedger/get-sops-secret@v1
         with:

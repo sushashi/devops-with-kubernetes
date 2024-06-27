@@ -55,13 +55,17 @@
 
 #### Note to self:
 - Decrypt secret is placed before kustomize namespace in workflow.
-- `kustomization.yaml` includes `secret.yaml` in resources.
+- `kustomization.yaml` includes `secret.yaml` in resources, the file is generated in Decrypt step.
 
 ## 3.04 Project v1.41
 
 [Source code](/Part3/Exercise3.04/)
 
-[Github Actions workflow](/.github/workflows/main-exercise3.04.yaml)
+[Github Actions Workflow](/.github/workflows/main-exercise3.04.yaml)
+
+- Create a new branch and push something.
+- Check on Github Actions and GKE (with `kubens` for example).
+- Wait 5-10min and visit http://{Ingress ip address}
 
 #### Note to self: 
 - Namespace has to be in lowercase.
@@ -69,7 +73,18 @@
 ## 3.05 Project v1.42
 [Source code (from 3.04)](/Part3/Exercise3.04/)
 
-[Github Actions workflow](/.github/workflows/delete-exercise3.05.yaml)
+[Github Actions Workflow](/.github/workflows/delete-exercise3.05.yaml)
+
+- Commands:
+    ```console
+    $ git checkout main
+    $ git push origin --delete <branch-name>
+    $ git branch -D <branch-name>
+    ```
+- Check on Github Actions and GKE (with `kubens` for example) to confirm namespace deletion.
+
+#### Note to self:
+- `github.event.ref` to get the branch name.
 
 ## Notes
 

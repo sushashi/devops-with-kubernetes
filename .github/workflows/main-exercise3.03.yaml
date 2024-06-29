@@ -78,7 +78,7 @@ jobs:
 
       - name: Decrypt and deploy secrets
         run: |-
-          echo "${{ secrets.AGE_KEYS }}" > keys.txt
+          echo "${{ secrets.AGE_KEYS_3_03 }}" > keys.txt
           export SOPS_AGE_KEY_FILE=keys.txt
           sops --decrypt secret.enc.yaml | kubectl apply -f -
         working-directory: ./Part3/Exercise3.03

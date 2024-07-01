@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  namespace: default
+  name: todo-read-wiki
+spec:
+  schedule: "0 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: todo-job
+            image: PROJECT/IMAGE/TODO-JOB
+            env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database-secrets
+                  key: DATABASE-PASSWORD
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: database-secrets
+                  key: DATABASE-USER
+            - name: PGHOST
+              value: 'todo-db-svc'
+            - name: PGPORT
+              value: '5432'
+          restartPolicy: Never

@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'Part3/Exercise3.03/**'
+      - 'Part3/Exercise3.07/**'
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}

@@ -1,4 +1,4 @@
-name: Release application
+name: Release application 3.07
 
 on:
   push:
@@ -67,7 +67,7 @@ jobs:
 
       - name: Decrypt secrets
         run: |-
-          echo "${{ secrets.AGE_KEYS }}" > keys.txt
+          echo "${{ secrets.AGE_KEYS_3_03 }}" > keys.txt
           export SOPS_AGE_KEY_FILE=keys.txt
           sops --decrypt secret.enc.yaml > ./manifests/secret.yaml
         working-directory: ./Part3/Exercise3.07

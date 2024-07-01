@@ -3,7 +3,7 @@ name: Release application
 on:
   push:
     paths:
-      - 'Part3/Exercise3.03/**'
+      - 'Part3/Exercise3.07/**'
       
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
@@ -47,7 +47,8 @@ jobs:
           docker build --tag "gcr.io/$PROJECT_ID/$IMAGE/todo-backend:$BRANCH-$GITHUB_SHA" "./todo-backend"
           docker build --tag "gcr.io/$PROJECT_ID/$IMAGE/todo-db:$BRANCH-$GITHUB_SHA" "./todo-db"
           docker build --tag "gcr.io/$PROJECT_ID/$IMAGE/todo-job:$BRANCH-$GITHUB_SHA" "./todo-job"
-        working-directory: ./Part3/Exercise3.03
+          docker build --tag "gcr.io/$PROJECT_ID/$IMAGE/todo-backup-job:$BRANCH-$GITHUB_SHA" "./todo-backup-job"
+        working-directory: ./Part3/Exercise3.07
 
       - name: Publish
         run: |-
@@ -55,7 +56,8 @@ jobs:
           docker push "gcr.io/$PROJECT_ID/$IMAGE/todo-backend:$BRANCH-$GITHUB_SHA"
           docker push "gcr.io/$PROJECT_ID/$IMAGE/todo-db:$BRANCH-$GITHUB_SHA"
           docker push "gcr.io/$PROJECT_ID/$IMAGE/todo-job:$BRANCH-$GITHUB_SHA"
-        working-directory: ./Part3/Exercise3.03
+          docker push "gcr.io/$PROJECT_ID/$IMAGE/todo-backup-job:$BRANCH-$GITHUB_SHA"
+        working-directory: ./Part3/Exercise3.07
 
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v2
@@ -66,9 +68,10 @@ jobs:
           kustomize edit set image PROJECT/IMAGE/TODO-BACKEND=gcr.io/$PROJECT_ID/$IMAGE/todo-backend:$BRANCH-$GITHUB_SHA
           kustomize edit set image PROJECT/IMAGE/TODO-DB=gcr.io/$PROJECT_ID/$IMAGE/todo-db:$BRANCH-$GITHUB_SHA
           kustomize edit set image PROJECT/IMAGE/TODO-JOB=gcr.io/$PROJECT_ID/$IMAGE/todo-job:$BRANCH-$GITHUB_SHA
+          kustomize edit set image PROJECT/IMAGE/TODO-DB-BACKUP=gcr.io/$PROJECT_ID/$IMAGE/todo-backup-job:$BRANCH-$GITHUB_SHA
           kustomize build . | kubectl apply -f -
           kubectl get services -o wide
-        working-directory: ./Part3/Exercise3.03
+        working-directory: ./Part3/Exercise3.07
 
       - name: Sops Binary Installer
         uses: mdgreenwald/mozilla-sops-action@v1.6.0
@@ -81,4 +84,4 @@ jobs:
           echo "${{ secrets.AGE_KEYS_3_03 }}" > keys.txt
           export SOPS_AGE_KEY_FILE=keys.txt
           sops --decrypt secret.enc.yaml | kubectl apply -f -
-        working-directory: ./Part3/Exercise3.03
+        working-directory: ./Part3/Exercise3.07

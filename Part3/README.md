@@ -116,9 +116,9 @@ On the other hand, one of the disadvantages is that it is more costly to acquire
 - Use `$ gcloud auth print-access-token` to generate a token and update the file secret.yaml
 
 #### Note to self:
-- Note that the token is only valid 3600seconds. I should consider an authentification method as explained in the course for github-actions.
+- Note that the token is only valid 3600 seconds. I should consider ah authentification method as explained in the course for github-actions.
 - Also note that postgres images and versions has to match to execute PG_DUMP.
-- Also note that secrets string data has to be base64. (and using `stringData` instead of `data` is not encrypted!)
+- Also note that secrets string data has to be base64. (`stringData` does not get encrypted compared to `data` in `secret.yaml`!)
 
 ## Notes
 

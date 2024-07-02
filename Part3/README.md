@@ -86,6 +86,40 @@
 #### Note to self:
 - `github.event.ref` to get the branch name.
 
+## 3.06 DBaas vs DIY
+
+### DaaS (Database as a Service)
+
+The main advantage of using a DBaaS (Database as a service) such as Google Cloud SQL is that it offers a quick and easy deployment with minimal effort. It also offers many ready to use services such as backups, data encryption, replication, maintenance, updates, monitoring and so on. 
+
+These services are implemented by experts using the latest technologies using the most robust security standards and is often well documented.
+
+DaaS are cost-effective since it eliminates an upfront investment in physical infrastructure and configuration by hiring experts.
+
+On the other hand, the main disadvantage of a DBaaS is that we don’t have any control over the server, we depend entirely on the provider. They can lock up our data due to some policy changes or government decision. They can also lose them due to some hardware failures.
+Moreover, it can get expensive fast if we have an increase of data storage needs or data replications for redundancy for example.
+
+### DIY (Do it yourself) database:
+
+Comparing to a DIY (Do it yourself) database, we have a full control over the infrastructure, the software and data management, but most importantly, we own our data.
+We can tailor the database to our specific needs and preferences such customized backup methods or database replication in our own infrastructure. It is potentially more cost effective if we need a big in-house database.
+
+On the other hand, one of the disadvantages is that it is more costly to acquire all the infrastructure and to hire experts. Moreover, developing, configuring and maintaining an in-house database is not a simple task, it requires a lot of experts in diverse domain and may be really time consuming. Moreover, a simple mistake can lead to huge damage.
+
+
+
+## 3.07 
+
+[Source code](/Part3/Exercise3.07/)
+
+- The shell script is based on a CURL POST command explained by google [here](https://cloud.google.com/storage/docs/authentication)
+- Use `$ gcloud auth print-access-token` to generate a token and update the file secret.yaml
+
+#### Note to self:
+- Note that the token is only valid 3600seconds. I should consider an authentification method as explained in the course for github-actions.
+- Also note that postgres images and versions has to match to execute PG_DUMP.
+- Also note that secrets string data has to be base64. (and using `stringData` instead of `data` is not encrypted!)
+
 ## Notes
 
 - Delete cluster with:

@@ -4,14 +4,15 @@ metadata:
   namespace: default
   name: todo-db-backup
 spec:
-  schedule: "*/5 * * * *"
+  schedule: "0 0 * * *"
   jobTemplate:
     spec:
       template:
         spec:
           containers:
           - name: todo-db-backup
-            image: PROJECT/IMAGE/TODO-DB-BACKUP
+            image: sushashu/todo-db-backup:3.07
+            imagePullPolicy: Always
             env:
             - name: PGPASSWORD
               valueFrom:

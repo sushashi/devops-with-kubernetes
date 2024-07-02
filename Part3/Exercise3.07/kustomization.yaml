@@ -16,7 +16,7 @@ images:
   - name: PROJECT/IMAGE/TODO-BACKEND
     newName: sushashu/todo-backend:v1.4
   - name: PROJECT/IMAGE/TODO-DB
-    newName: sushashu/todo-db:2.08
+    newName: sushashu/todo-db:3.07
   - name: PROJECT/IMAGE/TODO-JOB
     newName: sushashu/todo-job:2.09
   - name: PROJECT/IMAGE/TODO-DB-BACKUP

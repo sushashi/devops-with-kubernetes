@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  namespace: default
+  name: todo-db-backup
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: todo-db-backup
+            image: sushashu/todo-db-backup:3.07
+            imagePullPolicy: Always
+            env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database-secrets
+                  key: DATABASE-PASSWORD
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: database-secrets
+                  key: DATABASE-USER
+            - name: TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: database-secrets
+                  key: GOOGLE-TOKEN
+            - name: PGHOST
+              value: 'todo-db-svc'
+            - name: PGPORT
+              value: '5432'
+          restartPolicy: Never

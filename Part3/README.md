@@ -106,19 +106,30 @@ We can tailor the database to our specific needs and preferences such customized
 
 On the other hand, one of the disadvantages is that it is more costly to acquire all the infrastructure and to hire experts. Moreover, developing, configuring and maintaining an in-house database is not a simple task, it requires a lot of experts in diverse domain and may be really time consuming. Moreover, a simple mistake can lead to huge damage.
 
-
-
 ## 3.07 
-
 [Source code](/Part3/Exercise3.07/)
 
 - The shell script is based on a CURL POST command explained by google [here](https://cloud.google.com/storage/docs/authentication)
 - Use `$ gcloud auth print-access-token` to generate a token and update the file secret.yaml
 
 #### Note to self:
-- Note that the token is only valid 3600 seconds. I should consider ah authentification method as explained in the course for github-actions.
+- Note that the token is only valid 3600 seconds. I should consider an authentification method as explained in the course for github-actions.
 - Also note that postgres images and versions has to match to execute PG_DUMP.
 - Also note that secrets string data has to be base64. (`stringData` does not get encrypted compared to `data` in `secret.yaml`!)
+
+## 3.08 Project v1.5
+[manifests yaml files](/Part3/Exercise3.08/)
+- Played around with resource limits.
+
+## 3.09
+[manifests yaml files](/Part3/Exercise3.09/)
+- Played around with resource limits.
+## 3.10 Project v1.6
+- Activate `Cloud Logging API`
+- Go to Logs Explorer
+
+![screenshot](/Part3/Exercise3.10/Exercise_3.10_Screenshot%202024-07-03.jpg)
+
 
 ## Notes
 

@@ -102,7 +102,7 @@ Moreover, it can get expensive fast if we have an increase of data storage needs
 ### DIY (Do it yourself) database:
 
 Comparing to a DIY (Do it yourself) database, we have a full control over the infrastructure, the software and data management, but most importantly, we own our data.
-We can tailor the database to our specific needs and preferences such customized backup methods or database replication in our own infrastructure. It is potentially more cost effective if we need a big in-house database.
+We can tailor the database to our specific needs and preferences such as customized backup methods or database replication in our own infrastructure. It is potentially more cost effective if we need a big in-house database.
 
 On the other hand, one of the disadvantages is that it is more costly to acquire all the infrastructure and to hire experts. Moreover, developing, configuring and maintaining an in-house database is not a simple task, it requires a lot of experts in diverse domain and may be really time consuming. Moreover, a simple mistake can lead to huge damage.
 

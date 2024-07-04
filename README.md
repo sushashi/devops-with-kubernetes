@@ -12,3 +12,7 @@ This repository is used for the [DevOps with Kubernetes](https://devopswithkuber
 ## Part 3: GKE
 - [Course material](https://devopswithkubernetes.com/part-3)
 - [Exercise submission](/Part3/)
+
+## Part 4
+- [Course material](https://devopswithkubernetes.com/part-4)
+- [Exercise submission](/Part4/)

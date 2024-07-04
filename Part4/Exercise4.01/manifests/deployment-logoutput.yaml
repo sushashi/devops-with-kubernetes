@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: logoutput-pingpong
+  name: splitted-logoutput
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logoutput
+  template:
+    metadata:
+      labels:
+        app: logoutput
+    spec:
+      volumes:
+        - name: config-test
+          configMap:
+            name: example-configmap
+            items:
+            - key: "information.txt"
+              path: "information.txt"
+        - name: shared-log-pong
+          persistentVolumeClaim:
+            claimName: image-claim
+      containers:
+        - name: logoutput-writer
+          image: sushashu/logoutput-writer:1.10
+          volumeMounts: # Mount volume
+          - name: shared-log-pong
+            mountPath: /usr/src/app/files
+        - name: logoutput-reader
+          imagePullPolicy: Always
+          image: sushashu/logoutput-reader:4.01
+          env:
+            - name: PORT
+              value: "3000"
+            - name: MSG
+              valueFrom:
+                configMapKeyRef:
+                  name: example-configmap
+                  key: MESSAGE
+          volumeMounts: # Mount volume
+          - name: shared-log-pong
+            mountPath: /usr/src/app/files
+          - name: config-test
+            mountPath: /usr/src/app/fromconfigmap
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /readerz
+              port: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: logoutput-pingpong
+  name: logoutput-reader-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: logoutput
+  ports:
+    - port: 1234
+      protocol: TCP
+      targetPort: 3000

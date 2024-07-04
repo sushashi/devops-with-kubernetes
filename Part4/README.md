@@ -35,5 +35,30 @@ $ sops --decrypt secret.enc.yaml | kubectl apply -f -
         splitted-logoutput-66d4d67fb7-tll9h                       2/2     Running   0          2m37s
     ```
 
+## 4.02
+[Source code](/Part4/Exercise4.02/)
+
+Commands:
+```console
+$ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
+$ docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube
+$ kubectl create namespace project
+$ kubectl apply -f manifests
+```
+
+Decrypt secrets env variables and apply:
+```console
+$ export SOPS_AGE_KEY_FILE=$(pwd)/key.txt
+$ sops --decrypt secret.enc.yaml | kubectl apply -f -
+```
+
+- Test by deploying with wrong credentials. 
+    ```console
+        NAME                               READY   STATUS    RESTARTS      AGE
+        todo-db-stset-0                    1/1     Running   0             104s
+        todo-backend-dep-b875df87f-c42mj   0/1     Running   3 (27s ago)   2m8s
+        project-dep-c4b8b675f-v9xgv        0/1     Running   4 (6s ago)    2m8s
+    ```
+
 ## Notes
 

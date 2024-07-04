@@ -60,5 +60,10 @@ $ sops --decrypt secret.enc.yaml | kubectl apply -f -
         project-dep-c4b8b675f-v9xgv        0/1     Running   4 (6s ago)    2m8s
     ```
 
+## 4.03
+- Query:
+
+        `sum(kube_pod_info{created_by_kind="StatefulSet", namespace="prometheus"})`
+
 ## Notes
 

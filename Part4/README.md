@@ -63,7 +63,28 @@ $ sops --decrypt secret.enc.yaml | kubectl apply -f -
 ## 4.03
 - Query:
 
-        `sum(kube_pod_info{created_by_kind="StatefulSet", namespace="prometheus"})`
+        sum(kube_pod_info{created_by_kind="StatefulSet", namespace="prometheus"})
+
+## 4.04
+[yaml files](/Part4/Exercise4.04/)
+
+- install Prometheus
+    ```console
+    $ kubectl create namespace prometheus
+    $ helm install prometheus-community/kube-prometheus-stack --generate-name --namespace prometheus
+    $ kubectl get po -n prometheus
+    $ kubectl -n prometheus port-forward prometheus-kube-prometheus-stack-1720-prometheus-0 9090:9090
+    ```
+
+- install Argo Rollouts
+    ```console
+    $ kubectl create namespace argo-rollouts
+    $ kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
+    ```
+- play around with rolling update
+    - initially with the image `sushashu/todo-backend:v1.4`.
+    - then `$ kubectl apply -f manifests/deployment-todos-backend.yaml` with the image `sushashu/todo-backend:v1.7`.
+    - check what happens when you change different values such as `successCondition` in [analysistemplate.yaml](/Part4/Exercise4.04/manifests/analysistemplate.yaml).
 
 ## Notes
 

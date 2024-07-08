@@ -1,0 +1,71 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  namespace: project
+  name: project-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: project
+  strategy:
+    canary:
+      steps:
+      - setWeight: 25
+      - pause:
+          duration: 30s
+      - setWeight: 50
+      - pause:
+          duration: 30s
+      - analysis:
+          templates:
+          - templateName: cpu-usage-rate
+  template:
+    metadata:
+      labels:
+        app: project
+    spec:
+      volumes:
+        - name: files-storage
+          persistentVolumeClaim:
+            claimName: project-claim
+      containers:
+        - name: project
+          imagePullPolicy: Always
+          image: sushashu/project:v1.9
+          volumeMounts:
+          - name: files-storage
+            mountPath: /usr/src/app/files
+          env:
+            - name: PORT
+              value: "3000"
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /dbready
+              port: 3000
+          livenessProbe:
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            httpGet:
+              path: /dbready
+              port: 3000
+          resources:
+            limits:
+              cpu: "50m"
+              memory: "50Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: project
+  name: project-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: project
+  ports:
+    - port: 1234
+      protocol: TCP
+      targetPort: 3000

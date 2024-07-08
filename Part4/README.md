@@ -35,7 +35,7 @@ $ sops --decrypt secret.enc.yaml | kubectl apply -f -
         splitted-logoutput-66d4d67fb7-tll9h                       2/2     Running   0          2m37s
     ```
 
-## 4.02
+## 4.02 Project v1.7
 [Source code](/Part4/Exercise4.02/)
 
 Commands:
@@ -60,12 +60,12 @@ $ sops --decrypt secret.enc.yaml | kubectl apply -f -
         project-dep-c4b8b675f-v9xgv        0/1     Running   4 (6s ago)    2m8s
     ```
 
-## 4.03
+## 4.03 Prometheus
 - Query:
 
         sum(kube_pod_info{created_by_kind="StatefulSet", namespace="prometheus"})
 
-## 4.04
+## 4.04 Project v1.8
 [yaml files](/Part4/Exercise4.04/)
 
 - install Prometheus
@@ -85,6 +85,35 @@ $ sops --decrypt secret.enc.yaml | kubectl apply -f -
     - initially with the image `sushashu/todo-backend:v1.4`.
     - then `$ kubectl apply -f manifests/deployment-todos-backend.yaml` with the image `sushashu/todo-backend:v1.7`.
     - check what happens when you change different values such as `successCondition` in [analysistemplate.yaml](/Part4/Exercise4.04/manifests/analysistemplate.yaml).
+
+## 4.05 Project v1.9
+[Source code](/Part4/Exercise4.05/)
+
+Implemented:
+- Handle 'Done' todos [project](/Part4/Exercise4.05/project/).
+- PUT request to `/todos/<id>` in [todo-backend](/Part4/Exercise4.05/todo-backend/).
+- Database adaptation: `done` attribute.
+
+Commands:
+```console
+$ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
+$ docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube
+$ kubectl create namespace logoutput-pingpong
+$ kubectl apply -f manifests
+```
+
+Decrypt secrets env variables and apply:
+```console
+$ export SOPS_AGE_KEY_FILE=$(pwd)/key.txt
+$ sops --decrypt secret.enc.yaml | kubectl apply -f -
+```
+
+- Database testing in docker:
+    ```console
+    $ docker build . -t sushashu/todo-db:4.05
+    $ docker run -d --name todo-db-container -e POSTGRES_PASSWORD=test -p 5432:5432 sushashu/todo-db:4.05
+    ```
+
 
 ## Notes
 

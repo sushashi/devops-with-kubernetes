@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Project</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+        <style>
+            @media all and (max-width : 480px) {
+                .container {
+                    margin: 10px;
+                }
+            }
+
+            @media all and (min-width:480px){
+                .container {
+                    margin: auto;
+                    width: 400px;
+                }
+            }
+
+            body {
+              font-family: "Roboto", serif;
+              text-align: center;
+            }
+
+            
+            .ctn-input {
+                margin-top: 5px;
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            .ctn-input .in-text {
+                width: 70%;
+            }
+            
+            .ctn-input .in-text > input {
+                width:100%;
+            }
+
+            input {
+                border-radius: 10px;
+                border-width: thin;
+                border-style: dotted;
+                height: 30px;
+                padding-left: 10px;
+            }
+
+            button {
+                border-radius: 10px;
+                border-width: thin;
+                border-style: none;
+                background-color: rgb(219, 253, 229);
+
+            }
+
+            button:hover {
+                background-color: rgb(110, 255, 154);
+                cursor: pointer;
+                box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+            }
+
+            button:active {
+                transform: translate(1px, 1px);
+                box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+
+            }
+
+            .done {
+                border-radius: 5px;
+                height: 25px;
+            }
+
+
+
+            .todobox {
+                border-style: dotted;
+                border-width: thin;
+                border-radius: 10px;
+                border-color:rgb(177, 177, 177);
+                margin-top: 10px;
+                padding: 10px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .text-box{
+                text-align: left;
+                width: 75%;
+            }
+
+        </style>
+    </head>
+
+    <body onload="getTodos()">
+        <div class="container">
+            <h2>Todo App</h2>
+            <div class="pic">
+                <img style="border-radius: 10px;" src="./image.jpg" alt="Some random image" width="100%">
+            </div>
+        
+            <div class="ctn-input">
+                <div class="in-text">
+                    <input type="text" id="input-todo">
+                </div>
+                <button id="create-btn">Create Todo</button>
+            </div>
+
+            <div class="thelist">
+                <div id="todoList">
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById("input-todo").addEventListener("keyup", (e) => {
+                if (e.keyCode === 13) {
+                    document.getElementById("create-btn").click()
+                }
+            })
+            document.getElementById("create-btn").addEventListener("click", addTodo)
+            
+            function addTodo() {
+                const ul = document.getElementById("todoList")
+                const text = document.getElementById("input-todo")
+                // console.log('added ', text.value)
+                if (text.value !== ""){
+                    fetch('/todos' , {
+                    // fetch('http://127.0.0.1:4000/todos', {
+                        method:'post',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            todo: text.value
+                        })
+                    })
+                    .then( response => {
+                        // console.log('response', response)
+                        text.value = ""
+                        ul.innerHTML = ""
+                    })
+                    .finally(
+                        location.reload()
+                    )
+                }
+            }
+
+            function getTodos() {
+                // console.log('getting todos')
+                fetch('/todos')
+                // fetch('http://127.0.0.1:4000/todos')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('data', data)
+                    data.todos.sort((a,b) => a.id - b.id)
+                    const ul = document.getElementById('todoList')
+                    data.todos.forEach(element => {
+                        let newli = document.createElement('div')                        
+                        newli.innerHTML = `
+                        <div class="todobox">
+                            <div class='text-box'>${element.done ? `<s>${element.todo}</s>` : `${element.todo}`}</div>
+                            <div> 
+                                ${element.done ? `<span>Done &#9989;</span>` :
+                                `<button class='done' id='btn-${element.id}'>Mark as done</button>`} 
+                            </div>
+                        </div>`
+                        newli.id = element.id
+                        ul.append(newli)
+                    });
+                })
+                .finally( () => {
+                    document.querySelectorAll('.done').forEach(item => {
+                        let btnId = item.id
+                        let todoId = btnId.substr(4, btnId.length)
+                        console.log(todoId)
+                        document.getElementById(btnId).addEventListener('click', () => putTodo(todoId))
+                    })
+                })
+            }
+
+            function putTodo(todoId) {
+
+                fetch('/todos/' + todoId, {
+                // fetch('http://127.0.0.1:4000/todos/' + todoId, {
+                        method:'put',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+
+                    })
+                    .then( response => {
+                        // console.log('response', response)
+                        const todolist = document.getElementById("todoList")
+                        todolist.innerHTML = ""
+                    })
+                    .then(
+                        location.reload()
+                    )
+            }
+
+        </script>
+    </body>
+</html>

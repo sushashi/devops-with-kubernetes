@@ -3,19 +3,19 @@
 ## 4.01
 [Source code](/Part4/Exercise4.01/)
 
-Commands:
-```console
-$ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
-$ docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube
-$ kubectl create namespace logoutput-pingpong
-$ kubectl apply -f manifests
-```
+- Commands:
+    ```console
+    $ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
+    $ docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube
+    $ kubectl create namespace logoutput-pingpong
+    $ kubectl apply -f manifests
+    ```
 
-Decrypt secrets env variables and apply:
-```console
-$ export SOPS_AGE_KEY_FILE=$(pwd)/key.txt
-$ sops --decrypt secret.enc.yaml | kubectl apply -f -
-```
+- Decrypt secrets env variables and apply:
+    ```console
+    $ export SOPS_AGE_KEY_FILE=$(pwd)/key.txt
+    $ sops --decrypt secret.enc.yaml | kubectl apply -f -
+    ```
 - Before the database is available:
     ```console
     $ kubectl get po
@@ -38,26 +38,26 @@ $ sops --decrypt secret.enc.yaml | kubectl apply -f -
 ## 4.02 Project v1.7
 [Source code](/Part4/Exercise4.02/)
 
-Commands:
-```console
-$ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
-$ docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube
-$ kubectl create namespace project
-$ kubectl apply -f manifests
-```
-
-Decrypt secrets env variables and apply:
-```console
-$ export SOPS_AGE_KEY_FILE=$(pwd)/key.txt
-$ sops --decrypt secret.enc.yaml | kubectl apply -f -
-```
-
-- Test by deploying with wrong credentials. 
+- Commands:
     ```console
-        NAME                               READY   STATUS    RESTARTS      AGE
-        todo-db-stset-0                    1/1     Running   0             104s
-        todo-backend-dep-b875df87f-c42mj   0/1     Running   3 (27s ago)   2m8s
-        project-dep-c4b8b675f-v9xgv        0/1     Running   4 (6s ago)    2m8s
+    $ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
+    $ docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube
+    $ kubectl create namespace project
+    $ kubectl apply -f manifests
+    ```
+
+- Decrypt and deploy secrets env variables:
+    ```console
+    $ export SOPS_AGE_KEY_FILE=$(pwd)/key.txt
+    $ sops --decrypt secret.enc.yaml | kubectl apply -f -
+    ```
+
+- Test by deploying with wrong credentials:
+    ```console
+    NAME                               READY   STATUS    RESTARTS      AGE
+    todo-db-stset-0                    1/1     Running   0             104s
+    todo-backend-dep-b875df87f-c42mj   0/1     Running   3 (27s ago)   2m8s
+    project-dep-c4b8b675f-v9xgv        0/1     Running   4 (6s ago)    2m8s
     ```
 
 ## 4.03 Prometheus
@@ -68,7 +68,7 @@ $ sops --decrypt secret.enc.yaml | kubectl apply -f -
 ## 4.04 Project v1.8
 [yaml files](/Part4/Exercise4.04/)
 
-- install Prometheus
+- Install Prometheus:
     ```console
     $ kubectl create namespace prometheus
     $ helm install prometheus-community/kube-prometheus-stack --generate-name --namespace prometheus
@@ -76,12 +76,12 @@ $ sops --decrypt secret.enc.yaml | kubectl apply -f -
     $ kubectl -n prometheus port-forward prometheus-kube-prometheus-stack-1720-prometheus-0 9090:9090
     ```
 
-- install Argo Rollouts
+- Install Argo Rollouts:
     ```console
     $ kubectl create namespace argo-rollouts
     $ kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
     ```
-- play around with rolling update
+- Play around with rolling update:
     - initially with the image `sushashu/todo-backend:v1.4`.
     - then `$ kubectl apply -f manifests/deployment-todos-backend.yaml` with the image `sushashu/todo-backend:v1.7`.
     - check what happens when you change different values such as `successCondition` in [analysistemplate.yaml](/Part4/Exercise4.04/manifests/analysistemplate.yaml).
@@ -95,25 +95,89 @@ Implemented:
 - Database adaptation: `done` attribute.
 
 Commands:
-```console
-$ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
-$ docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube
-$ kubectl create namespace logoutput-pingpong
-$ kubectl apply -f manifests
-```
+- Create cluster and deploy:
+    ```console
+    $ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
+    $ docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube
+    $ kubectl create namespace logoutput-pingpong
+    $ kubectl apply -f manifests
+    ```
 
-Decrypt secrets env variables and apply:
-```console
-$ export SOPS_AGE_KEY_FILE=$(pwd)/key.txt
-$ sops --decrypt secret.enc.yaml | kubectl apply -f -
-```
+- Decrypt and deploy secrets env variables:
+    ```console
+    $ export SOPS_AGE_KEY_FILE=$(pwd)/key.txt
+    $ sops --decrypt secret.enc.yaml | kubectl apply -f -
+    ```
 
-- Database testing in docker:
+### Note to self:
+- Database testing with docker:
     ```console
     $ docker build . -t sushashu/todo-db:4.05
     $ docker run -d --name todo-db-container -e POSTGRES_PASSWORD=test -p 5432:5432 sushashu/todo-db:4.05
     ```
 
+## 4.06 Project v2.0
+[Source code](/Part4/Exercise4.06/)
+
+Implemented:
+- [Broadcaster service](/Part4/Exercise4.06/todo-broadcaster/).
+- Posting on Discord.
+
+Commands:
+- Start cluster:
+    ```console
+    $ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
+    $ docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube
+    $ kubectl create namespace project
+    ```
+- Install Prometheus (for analytics from previous exercise):
+    ```console
+    $ kubectl create namespace prometheus
+    $ helm install prometheus-community/kube-prometheus-stack --generate-name --namespace prometheus
+    $ kubectl get po -n prometheus
+    $ kubectl -n prometheus port-forward prometheus-kube-prometheus-stack-1720-prometheus-0 9090:9090
+    ```
+
+- Install NATS:
+    ```console
+    $ helm install --set auth.enabled=false my-nats oci://registry-1.docker.io/bitnamicharts/nats
+    ```
+
+- Install Argo Rollouts:
+    ```console
+    $ kubectl create namespace argo-rollouts
+    $ kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
+    ```
+
+- Decrypt and deploy secrets env variables:
+    ```console
+    $ export SOPS_AGE_KEY_FILE=$(pwd)/key.txt
+    $ sops --decrypt secret.enc.yaml | kubectl apply -f -
+    ```
+- Deploy everything:
+    ```console
+    $ kubectl apply -f manifests
+    ```
+    - Visit http://127.0.0.1:8081/
+    - Check logs
+    - Check Discord fullstack_webhook
+
+### Note to self:
+- Database for dev:
+
+        $ docker run -p 5432:5432 -d -e POSTGRES_PASSWORD=test --name todo-db-container sushashu/todo-db:4.05
+
+- NATS for dev:
+
+        $ docker run -p 4222:4222 -p 8222:8222 -p 6222:6222 --name nats-server -ti nats:latest
+
+- Secret.yaml encryption:
+    ```console
+    $ sops --encrypt \
+      --age age12p9wfqn70au3fmj6fvey8ykkhfc2qd6spznzxtzfp7p5qv2rnf0qnjqhkx \
+      --encrypted-regex '^(stringData)$' \
+      secret.yaml > secret.enc.yaml
+    ```
+    > using `stringData` because `DISCORD_URL` is not base64
 
 ## Notes
-

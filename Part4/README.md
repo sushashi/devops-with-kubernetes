@@ -162,7 +162,28 @@ Commands:
     - Check logs
     - Check Discord fullstack_webhook
 
+### Note to self:
+- Database for dev:
+
+        $ docker run -p 5432:5432 -d -e POSTGRES_PASSWORD=test --name todo-db-container sushashu/todo-db:4.05
+
+- NATS for dev:
+
+        $ docker run -p 4222:4222 -p 8222:8222 -p 6222:6222 --name nats-server -ti nats:latest
+
+- Secret.yaml encryption:
+    ```console
+    $ sops --encrypt \
+      --age age12p9wfqn70au3fmj6fvey8ykkhfc2qd6spznzxtzfp7p5qv2rnf0qnjqhkx \
+      --encrypted-regex '^(stringData)$' \
+      secret.yaml > secret.enc.yaml
+    ```
+    > using `stringData` because `DISCORD_URL` is not base64
+
 ## 4.07
+[Source code](/Part4/Exercise4.07/)
+
+[Github workflow file](/.github/workflows/main-exercise4.07.yaml)
 
 - Create GKE Cluster:
     ```console
@@ -188,27 +209,16 @@ Commands:
     $ helm install nginx-ingress ingress-nginx/ingress-nginx
     ```
 
-- Login ArgoCD with IP address from `$ kubectl get svc`
-- Create application in ArgoCD
+- Login ArgoCD with IP address from `$ kubectl get svc`.
+- Create *Ping-pong app* in ArgoCD.
 - Commit some changes with the *Ping-pong app* and see the automated update.
 
-
 ### Note to self:
-- Database for dev:
-
-        $ docker run -p 5432:5432 -d -e POSTGRES_PASSWORD=test --name todo-db-container sushashu/todo-db:4.05
-
-- NATS for dev:
-
-        $ docker run -p 4222:4222 -p 8222:8222 -p 6222:6222 --name nats-server -ti nats:latest
-
-- Secret.yaml encryption:
-    ```console
-    $ sops --encrypt \
-      --age age12p9wfqn70au3fmj6fvey8ykkhfc2qd6spznzxtzfp7p5qv2rnf0qnjqhkx \
-      --encrypted-regex '^(stringData)$' \
-      secret.yaml > secret.enc.yaml
+- Sync git in VSCode after the an update since there is a commit ahead with the automated update that uses GitHub Workflow.
+- There seems to be some remaining problem with rolling updates and storage in GKE.
+- To delete GKE cluster:
     ```
-    > using `stringData` because `DISCORD_URL` is not base64
+    $ gcloud container clusters delete dwk-cluster --zone=europe-north1-b
+    ```
 
 ## Notes

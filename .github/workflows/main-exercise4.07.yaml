@@ -21,13 +21,13 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       # tag image with the GitHub SHA to get a unique tag
-      - name: build
+      - name: Build
         run: |-
           docker build --tag "sushashu/pingpong:$GITHUB_SHA" ./Part4/Exercise4.07/pingpong
           docker build --tag "sushashu/logoutput-writer:$GITHUB_SHA" ./Part4/Exercise4.07/logoutput-writer
           docker build --tag "sushashu/logoutput-reader:$GITHUB_SHA" ./Part4/Exercise4.07/logoutput-reader
 
-      - name: publish
+      - name: Publish
         run: |-
           docker push "sushashu/pingpong:$GITHUB_SHA"
           docker push "sushashu/logoutput-writer:$GITHUB_SHA"
@@ -43,7 +43,7 @@ jobs:
           kustomize edit set image IMAGE/READER=sushashu/logoutput-reader:$GITHUB_SHA
         working-directory: ./Part4/Exercise4.07
 
-      - name: commit kustomization.yaml to GitHub
+      - name: Commit kustomization.yaml to GitHub
         uses: EndBug/add-and-commit@v9
         with:
           add: './Part4/Exercise4.07/kustomization.yaml'

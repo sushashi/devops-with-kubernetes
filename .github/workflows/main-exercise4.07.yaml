@@ -28,56 +28,26 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       # tag image with the GitHub SHA to get a unique tag
-      # - name: build
-      #   run: |-
-      #     docker build --tag "sushashi/pingpong:$GITHUB_SHA" ./Part4/Exercise4.07/pingpong
-      #     docker build --tag "sushashi/logoutput-writer:$GITHUB_SHA" ./Part4/Exercise4.07/logoutput-writer
-      #     docker build --tag "sushashi/logoutput-reader:$GITHUB_SHA" ./Part4/Exercise4.07/logoutput-reader
-
       - name: build
         run: |-
-          docker build --tag "docker.io/sushashi/logoutput-reader:$GITHUB_SHA" ./Part4/Exercise4.07/logoutput-reader
-          docker push "docker.io/sushashi/logoutput-reader:$GITHUB_SHA"
+          docker build --tag "sushashu/pingpong:$GITHUB_SHA" ./Part4/Exercise4.07/pingpong
+          docker build --tag "sushashu/logoutput-writer:$GITHUB_SHA" ./Part4/Exercise4.07/logoutput-writer
+          docker build --tag "sushashu/logoutput-reader:$GITHUB_SHA" ./Part4/Exercise4.07/logoutput-reader
 
-      # - name: Login to Docker Hub
-      #   uses: docker/login-action@v3
-      #   with:
-      #     username: ${{ secrets.DOCKERHUB_USERNAME }}
-      #     password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      # - name: publish
-      #   run: |-
-      #     docker push "sushashi/pingpong:$GITHUB_SHA"
-      #     docker push "sushashi/logoutput-writer:$GITHUB_SHA"
-      #     docker push "sushashi/logoutput-reader:$GITHUB_SHA"
-
-
-      # - name: Build and publish PINGPONG
-      #   run: |-
-      #     docker build --tag "sushashi/pingpong:$GITHUB_SHA" .
-      #     docker push "sushashi/pingpong:$GITHUB_SHA"
-      #   working-directory: ./Part4/Exercise4.07/pingpong
-
-      # - name: Build and publish WRITER
-      #   run: |-
-      #     docker build --tag "sushashi/logoutput-writer:$GITHUB_SHA" .
-      #     docker push "sushashi/logoutput-writer:$GITHUB_SHA"
-      #   working-directory: ./Part4/Exercise4.07/logoutput-writer
-
-      # - name: Build and publish READER
-      #   run: |-
-      #     docker build --tag "sushashi/logoutput-reader:$GITHUB_SHA" .
-      #     docker push "sushashi/logoutput-reader:$GITHUB_SHA"
-      #   working-directory: ./Part4/Exercise4.07/logoutput-reader
+      - name: publish
+        run: |-
+          docker push "sushashu/pingpong:$GITHUB_SHA"
+          docker push "sushashu/logoutput-writer:$GITHUB_SHA"
+          docker push "sushashu/logoutput-reader:$GITHUB_SHA"
 
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v2
 
       - name: Use right image
         run: |-
-          kustomize edit set image IMAGE/PINGPONG=sushashi/pingpong:$GITHUB_SHA
-          kustomize edit set image IMAGE/WRITER=sushashi/logoutput-writer:$GITHUB_SHA
-          kustomize edit set image IMAGE/READER=sushashi/logoutput-reader:$GITHUB_SHA
+          kustomize edit set image IMAGE/PINGPONG=sushashu/pingpong:$GITHUB_SHA
+          kustomize edit set image IMAGE/WRITER=sushashu/logoutput-writer:$GITHUB_SHA
+          kustomize edit set image IMAGE/READER=sushashu/logoutput-reader:$GITHUB_SHA
 
       - name: commit kustomization.yaml to GitHub
         uses: EndBug/add-and-commit@v9

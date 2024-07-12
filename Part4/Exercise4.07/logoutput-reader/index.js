@@ -67,7 +67,7 @@ app.get("/", async (req, res) => {
     fileConfigText = await getConfigText()
 
     res.set('Content-Type', 'text/html')
-    res.send('FILE ctesto: '+ fileConfigText + '<br>' + 'env variable: MESSAGE=' + MSG + '<br>' + theString + '.<br>' + "Ping / Pongs: " + counterPong)
+    res.send('FILE sadsad: '+ fileConfigText + '<br>' + 'env variable: MESSAGE=' + MSG + '<br>' + theString + '.<br>' + "Ping / Pongs: " + counterPong)
 })
 
 app.get("/readerz", checkDb )

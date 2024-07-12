@@ -17,5 +17,5 @@ images:
   newName: sushashu/logoutput-writer
   newTag: "1.10"
 - name: IMAGE/READER
-  newName: sushashu/logoutput-reader:4.01
+  newName: sushashu/logoutput-reader
   newTag: "4.01"

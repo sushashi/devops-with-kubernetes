@@ -27,12 +27,19 @@ jobs:
       #     docker build --tag "sushashi/logoutput-writer:$GITHUB_SHA" ./Part4/Exercise4.07/logoutput-writer
       #     docker build --tag "sushashi/logoutput-reader:$GITHUB_SHA" ./Part4/Exercise4.07/logoutput-reader
 
-      - name: build
-        run: |-
-          docker build --tag "sushashi/logoutput-reader:$GITHUB_SHA" .
-          docker push "sushashi/logoutput-reader:$GITHUB_SHA"
-        working-directory: ./Part4/Exercise4.07/logoutput-reader
+      # - name: build
+      #   run: |-
+      #     docker build --tag "sushashi/logoutput-reader:$GITHUB_SHA" .
+      #     docker push "sushashi/logoutput-reader:$GITHUB_SHA"
+      #   working-directory: ./Part4/Exercise4.07/logoutput-reader
 
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: ./Part4/Exercise4.07/logoutput-reader
+          push: true
+          tags: sushashi/logoutput-reader:$GITHUB_SHA
       # - name: Login to Docker Hub
       #   uses: docker/login-action@v3
       #   with:

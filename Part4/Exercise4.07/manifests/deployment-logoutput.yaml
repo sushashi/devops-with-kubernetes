@@ -25,13 +25,13 @@ spec:
             claimName: image-claim
       containers:
         - name: logoutput-writer
-          image: sushashu/logoutput-writer:1.10
+          image: IMAGE/WRITER
           volumeMounts: # Mount volume
           - name: shared-log-pong
             mountPath: /usr/src/app/files
-        - name: logoutput-reader
+        - name: IMAGE/READER
           imagePullPolicy: Always
-          image: sushashu/logoutput-reader:4.01
+          image: IMAGE/READER
           env:
             - name: PORT
               value: "3000"

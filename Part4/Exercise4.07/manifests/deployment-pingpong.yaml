@@ -16,7 +16,7 @@ spec:
       containers:
         - name: pingpong
           imagePullPolicy: Always
-          image: sushashu/pingpong:4.01
+          image: IMAGE/PINGPONG
           env:
             - name: PORT
               value: "3000"

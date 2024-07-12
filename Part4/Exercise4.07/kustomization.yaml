@@ -9,6 +9,13 @@ resources:
 - manifests/persistentvolumeclaim.yaml
 - manifests/statefulset-psql.yaml
 
-# images:
-# - name: PROJECT/IMAGE
-#   newName: mluukkai/dwk1
+images:
+- name: IMAGE/PINGPONG
+  newName: sushashu/pingpong
+  newTag: "4.01"
+- name: IMAGE/WRITER
+  newName: sushashu/logoutput-writer
+  newTag: "1.10"
+- name: IMAGE/READER
+  newName: sushashu/logoutput-reader:4.01
+  newTag: "4.01"

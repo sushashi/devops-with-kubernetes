@@ -178,6 +178,26 @@ Commands:
     $ kubectl get -n argocd secrets argocd-initial-admin-secret -o yaml
     ```
     > password is in base64
+
+- Create namespace and install dependencies:
+    ```console
+    $ kubectl create namespace logoutput-pingpong
+    $ kubens logoutput-pingpong
+    $ helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+    $ helm repo update
+    $ helm install nginx-ingress ingress-nginx/ingress-nginx
+    ```
+
+- Login ArgoCD with IP address from `$ kubectl get svc`
+- Create application ...
+
+
+
+
+
+
+
+
 - On local k3d you may want to forward port:
     ```
     $ kubectl port-forward svc/argocd-server -n argocd 8080:443

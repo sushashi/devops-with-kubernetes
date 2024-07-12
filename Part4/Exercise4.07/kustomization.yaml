@@ -12,10 +12,10 @@ resources:
 images:
 - name: IMAGE/PINGPONG
   newName: sushashu/pingpong
-  newTag: 78d48a2a70a466a57c00cbc90c11df801d1fecf2
+  newTag: 32e4ebc54b154efa4a68a94c8112ab72aa456e06
 - name: IMAGE/READER
   newName: sushashu/logoutput-reader
-  newTag: 78d48a2a70a466a57c00cbc90c11df801d1fecf2
+  newTag: 32e4ebc54b154efa4a68a94c8112ab72aa456e06
 - name: IMAGE/WRITER
   newName: sushashu/logoutput-writer
-  newTag: 78d48a2a70a466a57c00cbc90c11df801d1fecf2
+  newTag: 32e4ebc54b154efa4a68a94c8112ab72aa456e06

@@ -29,7 +29,7 @@ spec:
           volumeMounts: # Mount volume
           - name: shared-log-pong
             mountPath: /usr/src/app/files
-        - name: IMAGE/READER
+        - name: logoutput-reader
           imagePullPolicy: Always
           image: IMAGE/READER
           env:

@@ -162,6 +162,28 @@ Commands:
     - Check logs
     - Check Discord fullstack_webhook
 
+## 4.07
+
+- Create GKE Cluster:
+    ```console
+    $ gcloud container clusters create dwk-cluster --zone=europe-north1-b --cluster-version=1.29
+    ```
+    
+- Setup ArgoCD:
+    ```console
+    $ kubectl create namespace argocd
+    $ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+    $ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+    $ kubectl get svc -n argocd
+    $ kubectl get -n argocd secrets argocd-initial-admin-secret -o yaml
+    ```
+    > password is in base64
+- On local k3d you may want to forward port:
+    ```
+    $ kubectl port-forward svc/argocd-server -n argocd 8080:443
+    ```
+- Password is in base64
+
 ### Note to self:
 - Database for dev:
 

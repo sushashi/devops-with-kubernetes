@@ -6,7 +6,7 @@ resources:
 - manifests/deployment-pingpong.yaml
 - manifests/ingress.yaml
 - manifests/persistentvolumeclaim-db.yaml
-- manifests/persistentvolumeclaim-db.yaml
+- manifests/persistentvolumeclaim.yaml
 - manifests/statefulset-psql.yaml
 
 # images:

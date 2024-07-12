@@ -11,11 +11,11 @@ resources:
 
 images:
 - name: IMAGE/PINGPONG
-  newName: node
-  newTag: "20"
+  newName: sushashu/pingpong
+  newTag: "4.01"
 - name: IMAGE/WRITER
-  newName: node
-  newTag: "20"
+  newName: sushashu/logoutput-writer
+  newTag: "1.10"
 - name: IMAGE/READER
-  newName: node
-  newTag: "20"
+  newName: sushashu/logoutput-reader
+  newTag: "4.01"

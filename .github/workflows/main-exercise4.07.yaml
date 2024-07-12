@@ -48,3 +48,4 @@ jobs:
         with:
           add: 'kustomization.yaml'
           message: New version released ${{ github.sha }}
+          working-directory: ./Part4/Exercise4.07

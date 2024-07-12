@@ -29,13 +29,13 @@ jobs:
 
       - name: Build and publish WRITER
         run: |-
-          docker build --tag "sushashi/logoutput-writer:$GITHUB_SHA"
+          docker build --tag "sushashi/logoutput-writer:$GITHUB_SHA" .
           docker push "sushashi/logoutput-writer:$GITHUB_SHA"
         working-directory: ./Part4/Exercise4.07/logoutput-writer
 
       - name: Build and publish READER
         run: |-
-          docker build --tag "sushashi/logoutput-reader:$GITHUB_SHA"
+          docker build --tag "sushashi/logoutput-reader:$GITHUB_SHA" .
           docker push "sushashi/logoutput-reader:$GITHUB_SHA"
         working-directory: ./Part4/Exercise4.07/logoutput-reader
 

@@ -29,8 +29,8 @@ jobs:
 
       - name: build
         run: |-
-          docker build -t docker.io:sushashi/logoutput-reader:$GITHUB_SHA ./Part4/Exercise4.07/logoutput-reader
-          docker push docker.io:sushashi/logoutput-reader:$GITHUB_SHA
+          docker build -t docker.io/sushashi/logoutput-reader:$GITHUB_SHA ./Part4/Exercise4.07/logoutput-reader
+          docker push docker.io/sushashi/logoutput-reader:$GITHUB_SHA
 
 
       # - name: Login to Docker Hub

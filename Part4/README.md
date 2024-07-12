@@ -189,20 +189,9 @@ Commands:
     ```
 
 - Login ArgoCD with IP address from `$ kubectl get svc`
-- Create application ...
+- Create application in ArgoCD
+- Commit some changes with the *Ping-pong app* and see the automated update.
 
-
-
-
-
-
-
-
-- On local k3d you may want to forward port:
-    ```
-    $ kubectl port-forward svc/argocd-server -n argocd 8080:443
-    ```
-- Password is in base64
 
 ### Note to self:
 - Database for dev:

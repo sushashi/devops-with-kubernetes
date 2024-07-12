@@ -40,7 +40,7 @@ const saveCounter = async () => {
 app.get("/pingpong", async (req, res) => {
     try{
         counter = await getCounter()
-        res.status(200).send("pong pang pong" + (counter+1) )
+        res.status(200).send("PONG: " + (counter+1) )
         saveCounter()
     } catch (err) {
         console.log('Error connection to database')

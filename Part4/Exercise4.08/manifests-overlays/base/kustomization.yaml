@@ -11,11 +11,13 @@ resources:
 - manifests/persistentvolumeclaim.yaml
 - manifests/statefulset-todos-db.yaml
 
-vars:
-  - name: TEMPLATE_NAME
-    objref:
+replacements:
+  - source:
       kind: Rollout
-      name: cpu-usage-rate
-      apiVersion: argoproj.io/v1alpha1
-    fieldref:
-      fieldpath: metadata.name
+      name: project-dep
+      fieldPath: spec.template.metadata.labels.app
+    targets:
+      - select:
+          kind: AnalysisTemplate
+        fieldPaths:
+          - spec.templateName

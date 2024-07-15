@@ -10,3 +10,12 @@ resources:
 - manifests/persistentvolumeclaim-db.yaml
 - manifests/persistentvolumeclaim.yaml
 - manifests/statefulset-todos-db.yaml
+
+vars:
+  - name: TEMPLATE_NAME
+    objref:
+      kind: Rollout
+      name: cpu-usage-rate
+      apiVersion: argoproj.io/v1alpha1
+    fieldref:
+      fieldpath: metadata.name

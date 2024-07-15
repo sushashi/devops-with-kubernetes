@@ -5,11 +5,6 @@ resources:
 
 namePrefix: staging-
 
-patches: 
- - path: dep-project.yaml
- - path: dep-backend.yaml
-
-
 images:
 - name: IMAGE/CRONJOB-TODO
   newName: sushashu/todo-job

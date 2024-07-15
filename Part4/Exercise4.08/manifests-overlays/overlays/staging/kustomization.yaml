@@ -6,8 +6,8 @@ resources:
 namePrefix: staging-
 
 patches: 
- - path: dep-project.yaml
- - path: dep-backend.yaml
+ - patch: dep-project.yaml
+ - patch: dep-backend.yaml
 
 
 images:

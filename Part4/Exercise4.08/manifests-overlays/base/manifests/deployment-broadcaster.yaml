@@ -19,7 +19,7 @@ spec:
           image: IMAGE/BROADCASTER
           env:
             - name: PROD_ENV
-              value: "false"
+              value: "'false'"
             - name: NATS_URL
               value: nats://my-nats:4222
             - name: DISCORD_URL

@@ -4,6 +4,8 @@ resources:
 - ./../../base
 
 namePrefix: staging-
+transformers:
+  - prefixtransformer.yaml
 
 images:
 - name: IMAGE/CRONJOB-TODO

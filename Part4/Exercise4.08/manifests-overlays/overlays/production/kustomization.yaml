@@ -7,6 +7,8 @@ resources:
 patches:
   - path: deployment-broadcaster.yaml
 
+namePrefix: prod-
+
 images:
 - name: IMAGE/CRONJOB-TODO
   newName: sushashu/todo-job

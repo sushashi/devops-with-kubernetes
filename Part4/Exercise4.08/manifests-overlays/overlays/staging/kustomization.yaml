@@ -3,6 +3,8 @@ kind: Kustomization
 resources:
 - ./../../base
 
+namePrefix: staging-
+
 images:
 - name: IMAGE/CRONJOB-TODO
   newName: sushashu/todo-job

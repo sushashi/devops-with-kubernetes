@@ -5,7 +5,7 @@ const { pid } = require('node:process');
 const webhookClient = new WebhookClient({ url: process.env.DISCORD_URL});
 
 const NATS_SERVER = process.env.NATS_URL || "127.0.0.1:4222"
-const PROD_ENV = process.env.PROD_ENV == 'true' || false
+const PROD_ENV = process.env.PROD_ENV
 
 const start = async () => {
     // to create a connection to a nats-server:
@@ -30,7 +30,7 @@ const start = async () => {
         const test_msg = JSON.stringify(JSON.parse(msg), null, 2)
         
         // console.log('Process ID: ', pid)
-        if (PROD_ENV){
+        if (PROD_ENV === "true"){
           webhookClient.send({
             content: 'Todo ' + todo_done + ': \n' + "```json\n" + test_msg + "\n```",
             username: 'DwK tester'

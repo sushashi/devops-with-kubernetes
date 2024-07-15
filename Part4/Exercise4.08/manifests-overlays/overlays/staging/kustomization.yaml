@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
 - ./../../base
 
-namePrefix: staging-
+# namePrefix: staging-
 
 images:
 - name: IMAGE/CRONJOB-TODO

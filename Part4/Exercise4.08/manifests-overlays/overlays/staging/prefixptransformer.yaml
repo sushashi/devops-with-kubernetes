@@ -2,6 +2,7 @@ apiVersion: builtin
 kind: PrefixSuffixTransformer
 metadata:
   name: customPrefixer
+  namespace: project
 prefix: "staging-"
 fieldSpecs:
 - kind: Deployment

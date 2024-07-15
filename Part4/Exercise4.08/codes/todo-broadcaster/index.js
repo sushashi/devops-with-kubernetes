@@ -7,6 +7,8 @@ const webhookClient = new WebhookClient({ url: process.env.DISCORD_URL});
 const NATS_SERVER = process.env.NATS_URL || "127.0.0.1:4222"
 const PROD_ENV = process.env.PROD_ENV
 
+console.log('Production env? :', PROD_ENV)
+
 const start = async () => {
     // to create a connection to a nats-server:
     const nc = await NATS.connect({ servers: NATS_SERVER });

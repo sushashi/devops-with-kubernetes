@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- manifests/analysistemplate.yaml
+- manifests/cronjob-todo.yaml
+- manifests/deployment-broadcaster.yaml
+- manifests/deployment-project.yaml
+- manifests/deployment-todos-backend.yaml
+- manifests/ingress.yaml
+- manifests/persistentvolumeclaim-db.yaml
+- manifests/persistentvolumeclaim.yaml
+- manifests/statefulset-todos-db.yaml

@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ./../../base
+
+images:
+- name: IMAGE/CRONJOB-TODO
+  newName: sushashu/todo-job
+  newTag: "2.09"
+- name: IMAGE/BROADCASTER
+  newName: sushashu/todo-broadcaster
+  newTag: "4.08"
+- name: IMAGE/PROJECT
+  newName: sushashu/project
+  newTag: v2.0
+- name: IMAGE/TODOS-BACKEND
+  newName: sushashu/todo-backend
+  newTag: v2.0
+- name: IMAGE/TODOS-DB
+  newName: sushashu/todo-db
+  newTag: "4.05"

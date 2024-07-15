@@ -213,6 +213,17 @@ Commands:
 - Create *Ping-pong app* in ArgoCD.
 - Commit some changes with the *Ping-pong app* and see the automated update.
 
+## 4.08
+
+- Start GKE cluster:
+    ```console
+    $ gcloud container clusters create dwk-cluster --zone=europe-north1-b --cluster-version=1.29
+    ```
+- Install all dependencies (as explained in [4.06](#406-project-v20))
+- Setup ArgoCD (as explained in [4.07](#407)):
+
+
+
 ### Note to self:
 - Sync git in VSCode after the an update since there is a commit ahead with the automated update that uses GitHub Workflow.
 - There seems to be some remaining problem with rolling updates and storage in GKE.

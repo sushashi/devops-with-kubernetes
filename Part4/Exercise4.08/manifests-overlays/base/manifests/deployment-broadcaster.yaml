@@ -4,7 +4,7 @@ metadata:
   namespace: project
   name: todo-broadcaster-dep
 spec:
-  replicas: 6
+  replicas: 1
   selector:
     matchLabels:
       app: todo-broadcaster
@@ -22,8 +22,4 @@ spec:
               value: "'false'"
             - name: NATS_URL
               value: nats://my-nats:4222
-            - name: DISCORD_URL
-              valueFrom:
-                secretKeyRef:
-                  name: database-secrets
-                  key: DISCORD-URL
+

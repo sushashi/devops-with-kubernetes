@@ -4,8 +4,10 @@ resources:
 - ./../../base
 
 namePrefix: staging-
-transformers:
-  - ./prefixtransformer.yaml
+
+patches: 
+ - path: dep-project.yaml
+
 
 images:
 - name: IMAGE/CRONJOB-TODO

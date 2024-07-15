@@ -11,7 +11,7 @@ images:
   newTag: "2.09"
 - name: IMAGE/BROADCASTER
   newName: sushashu/todo-broadcaster
-  newTag: "4.08"
+  newTag: "4.081"
 - name: IMAGE/PROJECT
   newName: sushashu/project
   newTag: v2.0

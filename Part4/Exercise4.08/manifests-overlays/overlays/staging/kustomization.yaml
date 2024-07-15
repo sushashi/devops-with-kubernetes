@@ -7,6 +7,7 @@ namePrefix: staging-
 
 patches: 
  - path: dep-project.yaml
+ - path: dep-backend.yaml
 
 
 images:

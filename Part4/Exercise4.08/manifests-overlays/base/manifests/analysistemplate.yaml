@@ -4,8 +4,9 @@ metadata:
   namespace: project
   name: cpu-usage-rate
 spec:
+  templateName: $(TEMPLATE_NAME)
   metrics:
-  - name: $(TEMPLATE_NAME)
+  - name: cpu-usage-rate
     initialDelay: 10m
     successCondition: result < 0.5
     provider:

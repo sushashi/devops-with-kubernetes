@@ -7,6 +7,9 @@ namespace: staging
 
 patches:
   - path: ingress.yaml
+    target:
+      kind: Ingress
+      name: project-ingress
 
 images:
 - name: IMAGE/CRONJOB-TODO

@@ -9,6 +9,9 @@ namespace: production
 patches:
   - path: deployment-broadcast.yaml
   - path: ingress.yaml
+    target:
+      kind: Ingress
+      name: project-ingress
 
 images:
 - name: IMAGE/CRONJOB-TODO

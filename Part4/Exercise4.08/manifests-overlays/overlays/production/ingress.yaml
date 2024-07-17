@@ -6,20 +6,3 @@ metadata:
 spec:
   ingressClassName: nginx
   loadBalancerIP: 10.0.0.1
-  rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: project-svc
-            port:
-              number: 1234
-      - path: /todos
-        pathType: Prefix
-        backend:
-          service:
-            name: todo-backend-svc
-            port:
-              number: 1234

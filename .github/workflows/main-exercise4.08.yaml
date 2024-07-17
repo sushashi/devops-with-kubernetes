@@ -1,0 +1,46 @@
+name: Release application 4.07
+
+on:
+  push:
+    paths:
+      - 'Part4/Exercise4.08/codes/**'
+
+jobs:
+  build-publish:
+    name: Build, Push, Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # tag image with the GitHub SHA to get a unique tag
+      - name: Build
+        run: |-
+          docker build --tag "sushashu/project:$GITHUB_SHA" ./Part4/Exercise4.08/codes/project
+
+      - name: Publish
+        run: |-
+          docker push "sushashu/project:$GITHUB_SHA"
+
+      - name: Set up Kustomize
+        uses: imranismail/setup-kustomize@v2
+
+      - name: Use right image
+        run: |-
+          kustomize edit set image IMAGE/PROJECT=sushashu/project:$GITHUB_SHA
+
+        working-directory: ./Part4/Exercise4.08/manifests-overlays/overlays/staging
+
+      - name: Commit kustomization.yaml to GitHub
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: './Part4/Exercise4.08/manifests-overlays/overlays/staging/kustomization.yaml'
+          message: New version released ${{ github.sha }}
+          working-directory: ./Part4/Exercise4.08/manifests-overlays/overlays/staging

@@ -5,4 +5,4 @@ metadata:
   namespace: staging
 spec:
   ingressClassName: nginx
-  loadBalancerIP: 10.0.0.2
+  # loadBalancerIP: 10.0.0.2

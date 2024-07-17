@@ -3,6 +3,9 @@ kind: Ingress
 metadata:
   name: staging-project-ingress
   namespace: staging
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.provider: nginx
 spec:
   ingressClassName: nginx-staging
   # loadBalancerIP: 10.0.0.2

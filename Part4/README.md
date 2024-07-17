@@ -222,14 +222,71 @@ Commands:
 - Install all dependencies (as explained in [4.06](#406-project-v20))
 - Setup ArgoCD (as explained in [4.07](#407)):
 
+- Install Prometheus (for analytics from previous exercise):
+    ```console
+    $ kubectl create namespace prometheus
+    $ helm install prometheus-community/kube-prometheus-stack --generate-name --namespace prometheus
+    $ kubectl get po -n prometheus
+    ```
+    > Check for the correct `prometheus-kube-prometheus-stack` pod used by `analysistemplate.yaml`
+
+- Install Argo Rollouts (for canary rollout):
+    ```console
+    $ kubectl create namespace argo-rollouts
+    $ kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
+    ```
+
+- Install and setup ArgoCD
+    ```console
+    $ kubectl create namespace argocd
+    $ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+    $ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+    $ kubectl get svc -n argocd
+    $ kubectl get -n argocd secrets argocd-initial-admin-secret -o yaml
+    ```
+    > password is in base64
+
+- Login ArgoCD with IP address from `$ kubectl get svc`.
+
+- Create namespace for `staging` and `production` environment:
+    ```console
+    $ kubectl create namespace staging
+    $ kubectl create namespace production
+    ```
+
+- Install NATS in both environment:
+    ```console
+    $ helm install --set auth.enabled=false my-nats oci://registry-1.docker.io/bitnamicharts/nats
+    ```
+- Decrypt and apply secrets.yaml in both environment.
+
+- Deploy the application in their environment:
+    ```console
+    $ kubens staging
+    $ kubectl apply -f staging.yaml
+    $ kubens production
+    $ kubectl apply -f production.yaml
+    ```
+
+- Wait to get IP addresses ...
+- Play around:
+- Commit some changes of the source code and see what happen:
+    - A `#prod` commit results in deploying to the production environment.
+    - Creating and marking *todos* is forwarded in Discord fullstack webhook in the production environment.
+
 
 
 ### Note to self:
-- Sync git in VSCode after the push since there is a commit ahead with the automated update that uses since GitHub Workflow that also makes a commit.
-- There seems to be some remaining problem with rolling updates and storage in GKE.
+- I use the normal Ingress controller instead of Nginx because I cant get two different IP adresses assigned to me on these two environments.
+
+
+
+## Notes
+
 - To delete GKE cluster:
     ```
     $ gcloud container clusters delete dwk-cluster --zone=europe-north1-b
     ```
 
-## Notes
+- There seems to be some remaining problem with rolling updates and storage in GKE. (PVC and Multiple pods)
+- Make a pull in VSCode after the push since there is a commit ahead because GitHub Workflow also makes a commit after the initial push. (Ex 4.07 and 4.08)

@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'Part4/Exercise4.08/codes/**'
+    branches:
+      - main
 
 jobs:
   build-publish:
@@ -57,5 +59,5 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           add: './Part4/Exercise4.08/manifests-overlays/overlays/production/kustomization.yaml'
-          message: New STAGING version released ${{ github.sha }}
+          message: New PRODUCTION version released ${{ github.sha }}
           working-directory: ./Part4/Exercise4.08/manifests-overlays/overlays/production

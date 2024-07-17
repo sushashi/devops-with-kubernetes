@@ -8,6 +8,7 @@ namespace: production
 
 patches:
   - path: deployment-broadcast.yaml
+  - path: ingress.yaml
 
 # namePrefix: prod-
 

@@ -3,4 +3,5 @@ kind: Ingress
 metadata:
   name: project-ingress
 spec:
+  ingressClassName: nginx
   loadBalancerIP: 10.0.0.1

@@ -3,5 +3,4 @@ kind: Ingress
 metadata:
   name: project-ingress
 spec:
-  rules:
-  - host: staging
+  loadBalancerIP: 10.0.0.2

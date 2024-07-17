@@ -53,7 +53,7 @@ spec:
               port: 3000
           resources:
             limits:
-              cpu: "50m"
+              cpu: "100m"
               memory: "50Mi"
 ---
 apiVersion: v1

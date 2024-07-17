@@ -5,6 +5,9 @@ resources:
 
 namespace: staging
 
+patchesStrategicMerge:
+  - ingress.yaml
+
 images:
 - name: IMAGE/CRONJOB-TODO
   newName: sushashu/todo-job

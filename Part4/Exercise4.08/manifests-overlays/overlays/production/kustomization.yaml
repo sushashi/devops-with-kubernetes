@@ -8,28 +8,28 @@ resources:
 namespace: production
 
 patches:
-  - path: deployment-broadcast.yaml
+- path: deployment-broadcast.yaml
   # - path: ingress.yaml
     # target:
     #   kind: Ingress
     #   name: project-ingress
 
 images:
-- name: IMAGE/CRONJOB-TODO
-  newName: sushashu/todo-job
-  newTag: "2.09"
 - name: IMAGE/BROADCASTER
   newName: sushashu/todo-broadcaster
   newTag: "4.08"
+- name: IMAGE/CRONJOB-DB-BACKUP
+  newName: sushashu/todo-db-backup:3.07
+  newTag: "3.07"
+- name: IMAGE/CRONJOB-TODO
+  newName: sushashu/todo-job
+  newTag: "2.09"
 - name: IMAGE/PROJECT
   newName: sushashu/project
-  newTag: v2.0
+  newTag: 5e0a6b5598feab4156be13b765f8ff277ed81e70
 - name: IMAGE/TODOS-BACKEND
   newName: sushashu/todo-backend
   newTag: v2.0
 - name: IMAGE/TODOS-DB
   newName: sushashu/todo-db
   newTag: "4.05"
-- name: IMAGE/CRONJOB-DB-BACKUP
-  newName: sushashu/todo-db-backup:3.07
-  newTag: "3.07"

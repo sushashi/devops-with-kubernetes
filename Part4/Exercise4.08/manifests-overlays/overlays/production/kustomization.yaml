@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - ./../../base
 - cronjob-db-backup.yaml
+- ingressclass.yaml
 
 namespace: production
 

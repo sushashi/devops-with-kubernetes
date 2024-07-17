@@ -32,15 +32,30 @@ jobs:
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v2
 
-      - name: Use right image
+      - name: Use right image (STAGING)
+        if: ${{ !contains(toJson(github.event.commits.*.message) ,'#prod') && github.event_name == 'push' }}
         run: |-
           kustomize edit set image IMAGE/PROJECT=sushashu/project:$GITHUB_SHA
-
         working-directory: ./Part4/Exercise4.08/manifests-overlays/overlays/staging
 
-      - name: Commit kustomization.yaml to GitHub
+      - name: Commit kustomization.yaml to GitHub (STAGING)
+        if: ${{ !contains(toJson(github.event.commits.*.message) ,'#prod') && github.event_name == 'push' }}
         uses: EndBug/add-and-commit@v9
         with:
           add: './Part4/Exercise4.08/manifests-overlays/overlays/staging/kustomization.yaml'
-          message: New version released ${{ github.sha }}
+          message: New STAGING version released ${{ github.sha }}
           working-directory: ./Part4/Exercise4.08/manifests-overlays/overlays/staging
+
+      - name: Use right image (PRODUCTION)
+        if: ${{ contains(toJson(github.event.commits.*.message) ,'#prod') && github.event_name == 'push' }}
+        run: |-
+          kustomize edit set image IMAGE/PROJECT=sushashu/project:$GITHUB_SHA
+        working-directory: ./Part4/Exercise4.08/manifests-overlays/overlays/production
+
+      - name: Commit kustomization.yaml to GitHub (PRODUCTION)
+        if: ${{ contains(toJson(github.event.commits.*.message) ,'#prod') && github.event_name == 'push' }}
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: './Part4/Exercise4.08/manifests-overlays/overlays/production/kustomization.yaml'
+          message: New STAGING version released ${{ github.sha }}
+          working-directory: ./Part4/Exercise4.08/manifests-overlays/overlays/production

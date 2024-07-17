@@ -4,5 +4,5 @@ metadata:
   name: production-project-ingress
   namespace: production
 spec:
-  # ingressClassName: nginx
+  ingressClassName: nginx-production
   # loadBalancerIP: 10.0.0.1

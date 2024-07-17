@@ -4,7 +4,7 @@ metadata:
   name: project-ingress
   namespace: staging
   annotations:
-    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.class: nginx-staging
     kubernetes.io/ingress.provider: nginx
 spec:
   ingressClassName: nginx-staging

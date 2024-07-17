@@ -5,8 +5,9 @@ resources:
 
 namePrefix: staging-
 
-patchesStrategicMerge:
-  - analysistemplate.yaml
+patches:
+  - path: deploy-project.yaml
+  - path: deploy-todos-backend.yaml
 
 images:
 - name: IMAGE/CRONJOB-TODO

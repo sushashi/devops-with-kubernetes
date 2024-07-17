@@ -200,7 +200,7 @@ Commands:
     ```
     > password is in base64
 
-- Create namespace and install dependencies:
+- Create namespace and install dependencies (nginx):
     ```console
     $ kubectl create namespace logoutput-pingpong
     $ kubens logoutput-pingpong
@@ -225,7 +225,7 @@ Commands:
 
 
 ### Note to self:
-- Sync git in VSCode after the an update since there is a commit ahead with the automated update that uses GitHub Workflow.
+- Sync git in VSCode after the push since there is a commit ahead with the automated update that uses since GitHub Workflow that also makes a commit.
 - There seems to be some remaining problem with rolling updates and storage in GKE.
 - To delete GKE cluster:
     ```

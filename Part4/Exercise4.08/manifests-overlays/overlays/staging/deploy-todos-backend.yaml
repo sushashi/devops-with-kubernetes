@@ -1,8 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
-metadata:
-  namespace: project
-  name: todo-backend-dep
+# metadata:
+#   namespace: project
+#   name: todo-backend-dep
 spec:
   strategy:
     canary:

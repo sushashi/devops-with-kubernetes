@@ -1,8 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
-metadata:
-  namespace: project
-  name: project-dep
+# metadata:
+#   namespace: project
+#   name: project-dep
 spec:
   strategy:
     canary:

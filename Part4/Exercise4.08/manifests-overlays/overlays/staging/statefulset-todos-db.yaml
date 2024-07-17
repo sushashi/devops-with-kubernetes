@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: StatefulSet
-metadata:
-  namespace: project
-  name: todo-db-stset
+# metadata:
+#   namespace: project
+#   name: todo-db-stset
 spec:
   template:
     spec:

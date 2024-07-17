@@ -5,8 +5,8 @@ resources:
 
 namespace: staging
 
-patchesStrategicMerge:
-  - ingress.yaml
+patches:
+  - path: ingress.yaml
 
 images:
 - name: IMAGE/CRONJOB-TODO

@@ -8,9 +8,7 @@ namespace: production
 
 patches:
   - path: deployment-broadcast.yaml
-
-patchesStrategicMerge:
-  - ingress.yaml
+  - path: ingress.yaml
 
 images:
 - name: IMAGE/CRONJOB-TODO

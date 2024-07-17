@@ -10,3 +10,9 @@ spec:
         - analysis:
             templates:
               - templateName: staging-cpu-usage-rate
+  template:
+    spec:
+      volumes:
+        -name: files-storage
+        persistentVolumeClaim:
+          claimName: staging-project-claim

@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: project
+  name: todo-db-stset
+spec:
+  template:
+    spec:
+      volumes:
+        - name: somedata
+          persistentVolumeClaim:
+            claimName: staging-somedata-pvc

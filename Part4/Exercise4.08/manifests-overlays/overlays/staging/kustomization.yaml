@@ -6,8 +6,9 @@ resources:
 namePrefix: staging-
 
 patches:
-  # - path: deploy-project.yaml
+  - path: deploy-project.yaml
   - path: deploy-todos-backend.yaml
+  - path: statefulset-todos-db.yaml
 
 images:
 - name: IMAGE/CRONJOB-TODO

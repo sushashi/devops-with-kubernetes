@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: project-ingress
+  namespace: production
 spec:
   ingressClassName: nginx
   loadBalancerIP: 10.0.0.1

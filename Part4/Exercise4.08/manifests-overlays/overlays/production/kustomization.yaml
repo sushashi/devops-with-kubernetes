@@ -4,10 +4,12 @@ resources:
 - ./../../base
 - cronjob-db-backup.yaml
 
+namespace: production
+
 patches:
   - path: deployment-broadcaster.yaml
 
-namePrefix: prod-
+# namePrefix: prod-
 
 images:
 - name: IMAGE/CRONJOB-TODO

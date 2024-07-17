@@ -4,8 +4,8 @@ metadata:
   name: project-ingress
   namespace: production
   annotations:
-    kubernetes.io/ingress.class: nginx-production
+    kubernetes.io/ingress.class: nginx
     kubernetes.io/ingress.provider: nginx
 spec:
-  ingressClassName: nginx-production
+  ingressClassName: nginx
   # loadBalancerIP: 10.0.0.1

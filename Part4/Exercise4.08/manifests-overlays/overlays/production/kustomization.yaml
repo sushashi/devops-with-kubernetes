@@ -7,7 +7,7 @@ resources:
 namespace: production
 
 patches:
-  - path: deployment-broadcaster.yaml
+  - path: deployment-broadcast.yaml
 
 # namePrefix: prod-
 

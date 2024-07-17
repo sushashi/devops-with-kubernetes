@@ -13,15 +13,15 @@ namespace: staging
 #       name: project-ingress
 
 images:
-- name: IMAGE/CRONJOB-TODO
-  newName: sushashu/todo-job
-  newTag: "2.09"
 - name: IMAGE/BROADCASTER
   newName: sushashu/todo-broadcaster
   newTag: "4.081"
+- name: IMAGE/CRONJOB-TODO
+  newName: sushashu/todo-job
+  newTag: "2.09"
 - name: IMAGE/PROJECT
   newName: sushashu/project
-  newTag: v2.0
+  newTag: 152ddbb7cc3b5d2c3d0d010f964ce276e7c84c56
 - name: IMAGE/TODOS-BACKEND
   newName: sushashu/todo-backend
   newTag: v2.0

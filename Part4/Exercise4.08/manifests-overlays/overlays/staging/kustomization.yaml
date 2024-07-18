@@ -11,6 +11,11 @@ namePrefix: staging-
 
 patches:
   - path: dep-analysistemplate.yaml
+    target:
+      name: project-dep
+  - path: dep-analysistemplate.yaml
+    target:
+      name: todo-backend
 #   - path: ingress.yaml
 #     target:
 #       kind: Ingress

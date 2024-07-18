@@ -10,8 +10,15 @@ namespace: production
 namePrefix: prod-
 
 patches:
-- path: deployment-broadcast.yaml
-- path: dep-analysistemplate.yaml
+  - path: deployment-broadcast.yaml
+  - path: dep-analysistemplate.yaml
+    target:
+      name: project-dep
+  - path: dep-analysistemplate.yaml
+    target:
+      name: todo-backend
+
+
 # - path: ingress.yaml
 #   target:
 #     kind: Ingress

@@ -3,7 +3,7 @@ kind: IngressClass
 metadata:
   name: nginx-prod
   annotations:
-    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.class: nginx-prod
 spec:
   controller: k8s.io/ingress-nginx
   # scope: Namespace

@@ -3,7 +3,7 @@ kind: IngressClass
 metadata:
   name: nginx-staging
   annotations:
-    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.class: nginx-staging
 spec:
   controller: k8s.io/ingress-nginx
   # scope: Namespace

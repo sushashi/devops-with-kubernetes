@@ -9,7 +9,6 @@ spec:
     matchLabels:
       app: todo-backend
   strategy:
-    type: Recreate
     canary:
       steps:
       - setWeight: 25

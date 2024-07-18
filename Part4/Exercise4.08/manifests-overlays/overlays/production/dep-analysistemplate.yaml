@@ -1,0 +1,11 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  namespace: project
+  name: project-dep
+spec:
+  strategy:
+    canary:
+      - analysis:
+          templates:
+            - templateName: prod-cpu-usage-rate

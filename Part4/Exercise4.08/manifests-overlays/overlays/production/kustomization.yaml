@@ -11,6 +11,7 @@ namePrefix: prod-
 
 patches:
 - path: deployment-broadcast.yaml
+- path: dep-analysistemplate.yaml
 # - path: ingress.yaml
 #   target:
 #     kind: Ingress

@@ -6,6 +6,8 @@ resources:
 
 namespace: staging
 
+namePrefix: staging-
+
 # patches:
 #   - path: ingress.yaml
 #     target:

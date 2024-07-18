@@ -10,3 +10,4 @@ resources:
 - manifests/persistentvolumeclaim-db.yaml
 - manifests/persistentvolumeclaim.yaml
 - manifests/statefulset-todos-db.yaml
+- manifests/ingressclass.yaml

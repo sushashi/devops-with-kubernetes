@@ -279,7 +279,8 @@ Commands:
 ### Note to self:
 - I use the normal Ingress controller instead of Nginx because I cant get two different IP adresses assigned to me on these two environments.
 
-
+- `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.1/deploy/static/provider/cloud/deploy.yaml
+`
 
 ## Notes
 

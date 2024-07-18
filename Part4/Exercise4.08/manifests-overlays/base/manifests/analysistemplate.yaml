@@ -5,7 +5,7 @@ metadata:
   name: cpu-usage-rate
 spec:
   metrics:
-  - name: cpu-usage-rate
+  # - name: cpu-usage-rate
     initialDelay: 10m
     successCondition: result < 0.5
     provider:

@@ -2,15 +2,15 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 - ./../../base
-# - ingressclass.yaml
+- ingressclass.yaml
 
 namespace: staging
 
-# patches:
-#   - path: ingress.yaml
-#     target:
-#       kind: Ingress
-#       name: project-ingress
+patches:
+  - path: ingress.yaml
+    target:
+      kind: Ingress
+      name: project-ingress
 
 images:
 - name: IMAGE/BROADCASTER

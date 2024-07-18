@@ -4,3 +4,4 @@ metadata:
   name: nginx-prod
 spec:
   controller: k8s.io/ingress-nginx
+  scope: Namespace

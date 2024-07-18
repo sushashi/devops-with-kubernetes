@@ -11,12 +11,8 @@ namePrefix: prod-
 
 patches:
   - path: deployment-broadcast.yaml
-  - target:
-      name: project-dep
-    path: dep-analysistemplate.yaml
-  - target:
-      name: todo-backend
-    path: dep-analysistemplate.yaml
+  - path: dep-analysistemplate-front.yaml
+  - path: dep-analysistemplate-back.yaml
 
 
 

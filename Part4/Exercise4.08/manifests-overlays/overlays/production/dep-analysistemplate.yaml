@@ -6,6 +6,7 @@ metadata:
 spec:
   strategy:
     canary:
+      steps:
       - analysis:
           templates:
             - templateName: prod-cpu-usage-rate

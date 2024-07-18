@@ -9,6 +9,7 @@ spec:
     matchLabels:
       app: project
   strategy:
+    type: Recreate
     canary:
       steps:
       - setWeight: 25

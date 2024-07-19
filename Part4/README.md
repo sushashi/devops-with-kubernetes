@@ -260,6 +260,14 @@ Commands:
     ```
 - Decrypt and apply secrets.yaml in both environment.
 
+- Prepare Persistent Volume in GKE supporting ReadWriteMany:
+    ```console
+    $ gcloud compute disks create --size=1GB --zone=europe-north1-b nfs-disk0
+    $ kubectl create namespace nfs-server
+    $ kubectl apply -n nfs-server -f base/nfs-server/nfs-server-dep.yaml
+
+    ```
+
 - Deploy the application in their environment:
     ```console
     $ kubens staging
@@ -267,6 +275,8 @@ Commands:
     $ kubens production
     $ kubectl apply -f production.yaml
     ```
+
+
 
 - Wait to get IP addresses ...
 - Play around:
@@ -281,6 +291,8 @@ Commands:
 
 - `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.1/deploy/static/provider/cloud/deploy.yaml
 `
+
+- https://medium.com/@Sushil_Kumar/readwritemany-persistent-volumes-in-google-kubernetes-engine-a0b93e203180
 
 ## Notes
 

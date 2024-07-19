@@ -21,6 +21,9 @@ spec:
     storage: 100Mi
   accessModes:
     - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  mountOptions:
+    - nfsvers=4.1
   nfs:
     server: nfs-server-prod.nfs-server.svc.cluster.local
     path: "/"

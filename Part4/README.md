@@ -265,7 +265,7 @@ Commands:
     $ gcloud compute disks create --size=1GB --zone=europe-north1-b nfs-disk01
     $ gcloud compute disks create --size=1GB --zone=europe-north1-b nfs-disk02
     $ kubectl create namespace nfs-server
-    $ kubectl apply -n nfs-server -f base/nfs-server/nfs-server-dep.yaml
+    $ kubectl apply -n nfs-server -f base/nfs-server/
 
     ```
 

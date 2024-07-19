@@ -15,4 +15,4 @@ spec:
           duration: 30s
       - analysis:
           templates:
-            - templateName: prod-cpu-usage-rate
+            - templateName: staging-cpu-usage-rate

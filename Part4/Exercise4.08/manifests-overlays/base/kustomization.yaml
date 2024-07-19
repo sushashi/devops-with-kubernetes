@@ -7,7 +7,7 @@ resources:
 - manifests/deployment-project.yaml
 - manifests/deployment-todos-backend.yaml
 - manifests/ingress.yaml
-- manifests/persistentvolumeclaim-db.yaml
-- manifests/persistentvolumeclaim.yaml
+# - manifests/persistentvolumeclaim-db.yaml
+# - manifests/persistentvolumeclaim.yaml
 - manifests/statefulset-todos-db.yaml
 # - manifests/ingressclass.yaml

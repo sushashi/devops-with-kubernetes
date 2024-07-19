@@ -29,7 +29,7 @@ images:
   newTag: "2.09"
 - name: IMAGE/PROJECT
   newName: sushashu/project
-  newTag: 12e43ebcb46bdb2224459f72ec9e3bb3d292e543
+  newTag: 98f15beee0bee6ea00d66898b7c996b999318254
 - name: IMAGE/TODOS-BACKEND
   newName: sushashu/todo-backend
   newTag: v2.0

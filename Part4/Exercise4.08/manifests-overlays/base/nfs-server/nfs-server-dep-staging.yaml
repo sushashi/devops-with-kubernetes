@@ -7,14 +7,14 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      role: nfs-server-staging
+      role: nfs-server
   template:
     metadata:
       labels:
-        role: nfs-server-staging
+        role: nfs-server
     spec:
       containers:
-      - name: nfs-server-staging
+      - name: nfs-server
         image: gcr.io/google_containers/volume-nfs:0.8
         ports:
           - name: nfs

@@ -40,7 +40,7 @@ spec:
                   name: database-secrets
                   key: DATABASE-USER
             - name: PGHOST
-              value: 'todo-db-svc'
+              value: 'staging-todo-db-svc'
             - name: PGPORT
               value: '5432'
             - name: NATS_URL

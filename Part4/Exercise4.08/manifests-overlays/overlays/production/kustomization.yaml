@@ -13,8 +13,7 @@ patches:
   - path: deployment-broadcast.yaml
   - path: dep-analysistemplate-front.yaml
   - path: dep-analysistemplate-back.yaml
-
-
+  - path: statefulset-todos-db.yaml
 
 # - path: ingress.yaml
 #   target:

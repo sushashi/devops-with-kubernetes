@@ -12,6 +12,7 @@ namePrefix: staging-
 patches:
   - path: dep-analysistemplate-front.yaml
   - path: dep-analysistemplate-back.yaml
+  - path: statefulset-todos-db.yaml
 #   - path: ingress.yaml
 #     target:
 #       kind: Ingress

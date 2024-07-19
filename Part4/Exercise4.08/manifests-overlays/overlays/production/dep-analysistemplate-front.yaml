@@ -16,3 +16,12 @@ spec:
       - analysis:
           templates:
             - templateName: prod-cpu-usage-rate
+  template:
+    metadata:
+      labels:
+        app: project
+    spec:
+      volumes:
+        - name: files-storage
+          persistentVolumeClaim:
+            claimName: prod-project-claim

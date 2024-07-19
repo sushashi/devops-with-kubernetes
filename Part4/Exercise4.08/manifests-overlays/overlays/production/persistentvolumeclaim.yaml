@@ -21,7 +21,7 @@ spec:
     storage: 100Mi
   accessModes:
     - ReadWriteMany
-  persistentVolumeReclaimPolicy: Recycle
+  # persistentVolumeReclaimPolicy: Recycle
   # mountOptions:
   #   - nfsvers=4.1
   nfs:

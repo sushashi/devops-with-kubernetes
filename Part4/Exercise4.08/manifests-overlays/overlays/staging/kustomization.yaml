@@ -10,9 +10,9 @@ namePrefix: staging-
 
 
 patches:
-  - path: dep-analysistemplate-front.yaml
-  - path: dep-analysistemplate-back.yaml
-  - path: statefulset-todos-db.yaml
+- path: dep-analysistemplate-front.yaml
+- path: dep-analysistemplate-back.yaml
+- path: statefulset-todos-db.yaml
 #   - path: ingress.yaml
 #     target:
 #       kind: Ingress
@@ -27,7 +27,7 @@ images:
   newTag: "2.09"
 - name: IMAGE/PROJECT
   newName: sushashu/project
-  newTag: 58f6c0b50ef12d4dbff00347b5cb23daa16e8746
+  newTag: 12e43ebcb46bdb2224459f72ec9e3bb3d292e543
 - name: IMAGE/TODOS-BACKEND
   newName: sushashu/todo-backend
   newTag: v2.0

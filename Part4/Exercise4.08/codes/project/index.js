@@ -35,7 +35,7 @@ app.get("/", async (req, res) => {
 })
 
 app.get("/dbready", async (req, res) => {
-    let url = "http://todo-backend-svc:1234/todos"
+    let url = process.env.DBREADY_URL
     let response
     try {
         response = await fetch(url)

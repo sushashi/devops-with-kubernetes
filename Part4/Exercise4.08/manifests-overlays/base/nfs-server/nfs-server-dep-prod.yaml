@@ -26,10 +26,10 @@ spec:
         securityContext:
           privileged: true
         volumeMounts:
-          - mountPath: /data
-            name: nfs-pvc
+          - mountPath: /data-prod
+            name: nfs-pvc-prod
       volumes:
-        - name: nfs-pvc
+        - name: nfs-pvc-prod
           gcePersistentDisk:
             pdName: nfs-disk01
             fsType: ext4

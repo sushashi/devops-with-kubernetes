@@ -9,9 +9,6 @@ resources:
 
 namespace: production
 
-# namePrefix: prod-
-
-# - path: dep-analysistemplate-back.yaml
 patches:
 - path: analysistemplate.yaml
 - path: deployment-broadcast.yaml

@@ -26,7 +26,7 @@ spec:
   #   - nfsvers=4.1
   nfs:
     server: nfs-server-prod.nfs-server.svc.cluster.local
-    path: "/abc"
+    path: "/data-prod"
 
 ---
 kind: PersistentVolumeClaim

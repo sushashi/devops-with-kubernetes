@@ -23,7 +23,7 @@ spec:
     - ReadWriteMany
   nfs:
     server: nfs-server-staging.nfs-server.svc.cluster.local
-    path: "/efg"
+    path: "/data-staging"
 
 ---
 kind: PersistentVolumeClaim

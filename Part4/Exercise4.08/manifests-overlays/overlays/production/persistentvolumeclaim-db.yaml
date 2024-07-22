@@ -30,7 +30,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: somedata-pvc
-  namespace: project
+  namespace: production
 spec:
   accessModes:
     - ReadWriteMany

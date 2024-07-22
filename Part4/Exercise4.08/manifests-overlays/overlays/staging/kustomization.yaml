@@ -8,13 +8,14 @@ resources:
 
 namespace: staging
 
-namePrefix: staging-
+# namePrefix: staging-
 
 
 patches:
 - path: dep-analysistemplate-front.yaml
-- path: dep-analysistemplate-back.yaml
+# - path: dep-analysistemplate-back.yaml
 - path: statefulset-todos-db.yaml
+- path: analysistemplate.yaml
 #   - path: ingress.yaml
 #     target:
 #       kind: Ingress

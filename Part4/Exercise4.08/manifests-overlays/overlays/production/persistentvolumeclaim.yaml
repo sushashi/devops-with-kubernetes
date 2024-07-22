@@ -33,7 +33,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: project-claim
-  namespace: project
+  namespace: production
 spec:
   accessModes:
     - ReadWriteMany

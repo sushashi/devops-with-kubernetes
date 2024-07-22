@@ -4,18 +4,18 @@ metadata:
   namespace: project
   name: project-dep
 spec:
-  strategy:
-    canary:
-      steps:
-      - setWeight: 25
-      - pause:
-          duration: 30s
-      - setWeight: 50
-      - pause:
-          duration: 30s
-      - analysis:
-          templates:
-            - templateName: staging-cpu-usage-rate
+  # strategy:
+  #   canary:
+  #     steps:
+  #     - setWeight: 25
+  #     - pause:
+  #         duration: 30s
+  #     - setWeight: 50
+  #     - pause:
+  #         duration: 30s
+  #     - analysis:
+  #         templates:
+  #           - templateName: staging-cpu-usage-rate
   template:
     metadata:
       labels:
@@ -25,15 +25,15 @@ spec:
         - name: files-storage
           persistentVolumeClaim:
             claimName: staging-project-claim
-      containers:
-        - name: project
-          imagePullPolicy: Always
-          image: IMAGE/PROJECT
-          volumeMounts:
-          - name: files-storage
-            mountPath: /usr/src/app/files
-          env:
-            - name: PORT
-              value: "3000"
-            - name: DBREADY_URL
-              value: "http://staging-todo-backend-svc:1234/todos"
+      # containers:
+      #   - name: project
+      #     imagePullPolicy: Always
+      #     image: IMAGE/PROJECT
+      #     volumeMounts:
+      #     - name: files-storage
+      #       mountPath: /usr/src/app/files
+      #     env:
+      #       - name: PORT
+      #         value: "3000"
+      #       - name: DBREADY_URL
+      #         value: "http://staging-todo-backend-svc:1234/todos"

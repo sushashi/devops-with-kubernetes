@@ -13,5 +13,5 @@ spec:
         address: http://kube-prometheus-stack-1721-prometheus.prometheus.svc.cluster.local:9090
         query: |
           scalar(
-            sum(rate(container_cpu_usage_seconds_total{namespace="project"}[1m]))/sum(machine_cpu_cores)*100 
+            sum(rate(container_cpu_usage_seconds_total{namespace="staging"}[1m]))/sum(machine_cpu_cores)*100 
           )

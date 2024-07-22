@@ -4,18 +4,6 @@ metadata:
   namespace: project
   name: project-dep
 spec:
-  strategy:
-    canary:
-      steps:
-      - setWeight: 25
-      - pause:
-          duration: 30s
-      - setWeight: 50
-      - pause:
-          duration: 30s
-      - analysis:
-          templates:
-            - templateName: prod-cpu-usage-rate
   template:
     metadata:
       labels:
@@ -25,15 +13,3 @@ spec:
         - name: files-storage
           persistentVolumeClaim:
             claimName: prod-project-claim
-      containers:
-        - name: project
-          imagePullPolicy: Always
-          image: IMAGE/PROJECT
-          volumeMounts:
-          - name: files-storage
-            mountPath: /usr/src/app/files
-          env:
-            - name: PORT
-              value: "3000"
-            - name: DBREADY_URL
-              value: "http://prod-todo-backend-svc:1234/todos"

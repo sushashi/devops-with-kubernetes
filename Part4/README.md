@@ -215,14 +215,19 @@ Commands:
 
 ## 4.08
 
+[Source code](/Part4/Exercise4.08/codes/)
+
+[Manifests overlays](/Part4/Exercise4.08/manifests-overlays/)
+
+[Github workflow file](/.github/workflows/main-exercise4.08.yaml)
+
 - Start GKE cluster:
     ```console
     $ gcloud container clusters create dwk-cluster --zone=europe-north1-b --cluster-version=1.29
     ```
-- Install all dependencies (as explained in [4.06](#406-project-v20))
-- Setup ArgoCD (as explained in [4.07](#407)):
 
-- Install Prometheus (for analytics from previous exercise):
+
+- Install Prometheus (analytics used for rolling update: "cpu-usage-rate"):
     ```console
     $ kubectl create namespace prometheus
     $ helm install prometheus-community/kube-prometheus-stack --generate-name --namespace prometheus
@@ -265,7 +270,7 @@ Commands:
     $ gcloud compute disks create --size=1GB --zone=europe-north1-b nfs-disk01
     $ gcloud compute disks create --size=1GB --zone=europe-north1-b nfs-disk02
     $ kubectl create namespace nfs-server
-    $ kubectl apply -n nfs-server -f base/nfs-server/
+   $ kubectl apply -n nfs-server -f /nfs-server/
 
     ```
 
@@ -281,19 +286,19 @@ Commands:
 
 - Wait to get IP addresses ...
 - Play around:
-- Commit some changes of the source code and see what happen:
-    - A `#prod` commit results in deploying to the production environment.
-    - Creating and marking *todos* is forwarded in Discord fullstack webhook in the production environment.
-
+    - A `#prod` commit results in deployment in the production environment, without *tag* in the staging environment.
+    - In the production environment, creating and marking *todos* are forwarded to Discord, whereas in the staging environment, it is only logged in the console.
 
 
 ### Note to self:
-- I use the normal Ingress controller instead of Nginx because I cant get two different IP adresses assigned to me on these two environments.
+- I use the normal Ingress controller instead of [Ingress-Nginx](https://kubernetes.github.io/ingress-nginx/) because I am not able to get two different IP adresses assigned on two different namespaces (environments). (Further investigation about "external" LoadBalancer and IngressClass ..)
 
-- `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.1/deploy/static/provider/cloud/deploy.yaml
-`
+- Yaml for Ingress-Nginx installation:
+    ```console
+    $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.1/deploy/static/provider/cloud/deploy.yaml
+    ```
 
-- https://medium.com/@Sushil_Kumar/readwritemany-persistent-volumes-in-google-kubernetes-engine-a0b93e203180
+- Explanation to set up a NFS-Server in order to have a Rolling update that works in GKE using ReadWriteMany as AccessMode in persistent volumes. [Medium Link](https://medium.com/@Sushil_Kumar/readwritemany-persistent-volumes-in-google-kubernetes-engine-a0b93e203180)
 
 ## Notes
 

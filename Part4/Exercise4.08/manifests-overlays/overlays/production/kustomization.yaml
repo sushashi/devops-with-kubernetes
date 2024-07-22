@@ -11,11 +11,11 @@ namespace: production
 
 # namePrefix: prod-
 
+# - path: dep-analysistemplate-back.yaml
 patches:
 - path: analysistemplate.yaml
 - path: deployment-broadcast.yaml
 - path: dep-analysistemplate-front.yaml
-# - path: dep-analysistemplate-back.yaml
 - path: statefulset-todos-db.yaml
 
 # - path: ingress.yaml
@@ -35,7 +35,7 @@ images:
   newTag: "2.09"
 - name: IMAGE/PROJECT
   newName: sushashu/project
-  newTag: 9ba1f53d494b3c04dc626d51ad90b23d7b6008ff
+  newTag: 4f2acb178f7b321f0303ef7e8c9b03cdb6ee4bb4
 - name: IMAGE/TODOS-BACKEND
   newName: sushashu/todo-backend
   newTag: v2.0

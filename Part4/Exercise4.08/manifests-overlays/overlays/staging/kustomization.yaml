@@ -11,9 +11,9 @@ namespace: staging
 # namePrefix: staging-
 
 
+# - path: dep-analysistemplate-back.yaml
 patches:
 - path: dep-analysistemplate-front.yaml
-# - path: dep-analysistemplate-back.yaml
 - path: statefulset-todos-db.yaml
 - path: analysistemplate.yaml
 #   - path: ingress.yaml
@@ -30,7 +30,7 @@ images:
   newTag: "2.09"
 - name: IMAGE/PROJECT
   newName: sushashu/project
-  newTag: 724986d765b6760edc55d90b25524fd43a2ea3b3
+  newTag: 2db8a4a44d7a6e1262dde564c270f7e8bdf7f765
 - name: IMAGE/TODOS-BACKEND
   newName: sushashu/todo-backend
   newTag: v2.0

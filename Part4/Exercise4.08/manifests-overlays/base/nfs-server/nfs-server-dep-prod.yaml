@@ -14,7 +14,7 @@ spec:
         role: nfs-server-prod
     spec:
       containers:
-      - name: nfs-server-prod
+      - name: nfs-server
         image: gcr.io/google_containers/volume-nfs:0.8
         ports:
           - name: nfs
@@ -48,4 +48,4 @@ spec:
     - name: rpcbind
       port: 111
   selector:
-    role: nfs-server
+    role: nfs-server-prod

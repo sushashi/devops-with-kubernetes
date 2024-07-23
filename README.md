@@ -16,3 +16,7 @@ This repository is used for the [DevOps with Kubernetes](https://devopswithkuber
 ## Part 4
 - [Course material](https://devopswithkubernetes.com/part-4)
 - [Exercise submission](/Part4/)
+
+## Part 5
+- [Course material](https://devopswithkubernetes.com/part-5)
+- [Exercise submission](/Part5/)

@@ -307,5 +307,6 @@ Commands:
     $ gcloud container clusters delete dwk-cluster --zone=europe-north1-b
     ```
 
-- There seems to be some remaining problem with rolling updates and storage in GKE. (PVC and Multiple pods)
+- There seems to be some remaining problem with rolling updates and storage in GKE. (PVC and Multiple pods prior to ex 4.08)
+
 - Make a pull in VSCode after the push since there is a commit ahead because GitHub Workflow also makes a commit after the initial push. (Ex 4.07 and 4.08)

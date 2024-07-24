@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dummysite-controller-dep
+  namespace: website
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dummysite-controller
+  template:
+    metadata:
+      labels:
+        app: dummysite-controller
+    spec:
+      serviceAccountName: dummysite-controller-account
+      containers:
+        - name: dummysite-controller
+          image: sushashu/dummysite-controller:v5.01
+          imagePullPolicy: Always
+          env:
+            - name: PORT
+              value: "3000"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dummysite-controller-svc
+  namespace: website
+spec:
+  type: ClusterIP
+  selector:
+    app: dummysite-controller
+  ports:
+    - port: 1234
+      protocol: TCP
+      targetPort: 3000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dummysite-controller-ingress
+  namespace: website
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: dummysite-controller-svc
+            port:
+              number: 1234

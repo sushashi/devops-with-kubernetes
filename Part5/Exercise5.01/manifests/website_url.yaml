@@ -1,0 +1,23 @@
+apiVersion: stable.dwk/v1
+kind: DummySite
+metadata:
+  name: website01
+  namespace: website
+spec:
+  website_url: "https://example.com/"
+# ---
+# apiVersion: stable.dwk/v1
+# kind: DummySite
+# metadata:
+#   name: website02
+#   namespace: website
+# spec:
+#   website_url: "https://google.com/"
+# ---
+# apiVersion: stable.dwk/v1
+# kind: DummySite
+# metadata:
+#   name: website03
+#   namespace: website
+# spec:
+#   website_url: "https://en.wikipedia.org/wiki/Kubernetes"

@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: main-container-dep
+  namespace: wikipedia
+  labels:
+    app: wikipedia-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wikipedia-app
+  template:
+    metadata:
+      labels:
+        app: wikipedia-app
+    spec:
+      volumes:
+        - name: website-storage
+          persistentVolumeClaim:
+            claimName: wikipedia-pvc
+      containers:
+        - name: nginx-container
+          image: nginx:latest
+          volumeMounts:
+          - name: website-storage
+            mountPath: /usr/share/nginx/html
+        - name: sidecar-container
+          image: sushashu/alpinecurl
+          command: ['sh','-c', 'while true; do sleep $(($RANDOM % 600 + 300)); curl -L https://en.wikipedia.org/wiki/Special:Random > /usr/share/nginx/html/index.html; done']
+          volumeMounts:
+          - name: website-storage
+            mountPath: /usr/share/nginx/html
+      initContainers:
+        - name: init-container
+          image: sushashu/alpinecurl
+          command: ['sh','-c', 'curl https://en.wikipedia.org/wiki/Kubernetes > /usr/share/nginx/html/index.html']
+          volumeMounts:
+          - name: website-storage
+            mountPath: /usr/share/nginx/html
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: wikipedia
+  name: wikipedia-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: wikipedia-app
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: wikipedia
+  name: wikipedia-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: wikipedia-svc
+            port:
+              number: 80

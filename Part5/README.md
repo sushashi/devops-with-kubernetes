@@ -203,3 +203,23 @@
         0s          Normal    Killing                 pod/podinfo-d9d886567-7wtlg             Stopping container podinfod
         0s          Warning   Unhealthy               pod/podinfo-d9d886567-7wtlg             Readiness probe failed: Get "http://10.42.2.12:4191/ready": dial tcp 10.42.2.12:4191: connect: connection refused
     ```
+
+## 5.04
+[Manifests](/Part5/Exercise5.04/manifests/)
+
+- Create k3d cluster:
+    ```console
+    $ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
+    $ docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube
+    ```
+- Create namespace *wikipedia*:
+    ```console
+    $ kubectl create namespace wikipedia
+    ```
+- Deploy:
+    ```console
+    $ kubectl apply -f manifests/
+    ```
+    > Note that init and sidecar container use a simple [alpine image with curl installed](/Part5/Exercise5.04/alpinecurl/).
+
+- Visit http://127.0.0.1:8081

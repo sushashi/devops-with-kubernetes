@@ -223,3 +223,103 @@
     > Note that init and sidecar container use a simple [alpine image with curl installed](/Part5/Exercise5.04/alpinecurl/).
 
 - Visit http://127.0.0.1:8081
+
+## 5.05
+
+#### Rancher is better than OpenShift because:
+- It can manage multiple clusters
+- It can import existing clusters
+- It can manage different kubernetes distributions
+- It is generally more flexible
+- It is easier to install
+- It is open-source and free
+
+## 5.06
+
+- Create k3d cluster without Traefik:
+    ```console
+    $ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2 --k3s-arg "--disable=traefik@server:0"
+    ```
+
+- Install Knative: [Knative Installation Guide](https://knative.dev/docs/install/yaml-install/serving/install-serving-with-yaml/#verifying-image-signatures)
+
+- Testing:
+    - [Deploying a Knative Service](https://knative.dev/docs/getting-started/first-service/#__tabbed_1_2)
+    - [Autoscaling](https://knative.dev/docs/getting-started/first-autoscale/)
+    - [Traffic splitting (Revision)](https://knative.dev/docs/getting-started/first-traffic-split/)
+    - To access service:
+        ```console
+        $ curl -H "Host: hello.knative-serving.172.18.0.3.sslip.io" http://localhost:8081
+        ```
+        > Where *Host* URL comes from the command `kubectl get ksvc` 
+    - To observe autoscaling:
+        ```console
+        $ kubectl get pod -l serving.knative.dev/service=hello -w
+        ```
+    - To list revision:
+        ```console
+        $ kubectl get revisions
+        ```
+
+## 5.07
+
+[Source code](/Part5/Exercise5.07/)
+
+[Manifests](/Part5/Exercise5.07/knative-manifests/)
+
+- Create k3d cluster without Treaefik:
+    ```console
+    $ k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2 --k3s-arg "--disable=traefik@server:0"
+    $ docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube
+    ```
+
+- Install Knative: [Knative Installation Guide](https://knative.dev/docs/install/yaml-install/serving/install-serving-with-yaml/#verifying-image-signatures)
+
+- Patch Knative to use Persistent Volumes: [Volume Support for Knative services](https://knative.dev/docs/serving/services/storage/)
+    - In order to use persistent volume for splitted write/read logoutput text file.
+
+- Deploy the PingPong application serverless.
+    ```console
+    $ kubectl apply -f knative-manifests
+    ```
+- Observe autoscaling of *deployment-pingpong* with:
+    ```console
+    $ kubectl get pod -l serving.knative.dev/service=pingpong -w
+    ```
+- Observe autoscaling of *deployment-logoutput* with:
+    ```console
+    $ kubectl get pod -l serving.knative.dev/service=splitted-logoutput -w
+    ```
+- Access the Pingpong service to increase the count:
+    ```console
+    $ curl --verbose -H "Host: pingpong.knative-serving.172.18.0.3.sslip.io" http://localhost:8081/pingpong
+    ```
+    > Only autoscaling activities on *deployment-pingpong* is observable.
+
+    - Note that we can also get the *count of pingpong* with:
+        ```console
+        $ curl -H "Host: pingpong.knative-serving.172.18.0.3.sslip.io" http://localhost:8081/count
+        ```
+- Access the application to view logoutput and pingpong count with:
+    ```console
+    $ curl --verbose -H "Host: splitted-logoutput.knative-serving.172.18.0.3.sslip.io" http://localhost:8081
+    ```
+    > Autoscaling activities on *deployment-logoutput* and *deployment-pingpong* are observable since logoutput calls pingpong/count
+
+### Note to self:
+- To get the *Host* address:
+    ```console
+    $ kubectl get ksvc
+    ```
+- `FETCH_URL` variable in [deployment-logoutput](/Part5/Exercise5.07/knative-manifests/deployment-logoutput.yaml):
+    - Host address of pingpong service is used to fetch from `/pingpong/count`:
+
+        ```console
+        http://pingpong.knative-serving.172.18.0.3.sslip.io/count
+        ```
+    > ~ Knative version of `http://pingpong-svc:1234/count`
+
+
+- Mounting large volumes may add considerable overhead to the application's start up time. [Persistent Volume Warning](https://knative.dev/docs/serving/services/storage/#volume-support-for-knative-services)
+
+## 5.08

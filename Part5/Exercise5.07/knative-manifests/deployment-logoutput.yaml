@@ -1,0 +1,42 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: splitted-logoutput
+spec:
+  template:
+    spec:
+      volumes:
+        - name: config-test
+          configMap:
+            name: example-configmap
+            items:
+            - key: "information.txt"
+              path: "information.txt"
+        - name: shared-log-pong
+          persistentVolumeClaim:
+            claimName: image-claim
+      containers:
+        - name: logoutput-writer
+          image: sushashu/logoutput-writer:1.10
+          volumeMounts: # Mount volume
+          - name: shared-log-pong
+            mountPath: /usr/src/app/files
+        - name: logoutput-reader
+          image: sushashu/logoutput-reader:5.07
+          ports:
+          - containerPort: 8080
+          env:
+            - name: PORT_CONTAINER
+              value: "8080"
+            - name: FETCH_URL
+              value: "http://pingpong.knative-serving.172.18.0.3.sslip.io/count"
+            - name: MSG
+              valueFrom:
+                configMapKeyRef:
+                  name: example-configmap
+                  key: MESSAGE
+          volumeMounts: # Mount volume
+          - name: shared-log-pong
+            mountPath: /usr/src/app/files
+          - name: config-test
+            mountPath: /usr/src/app/fromconfigmap

@@ -1,0 +1,29 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: pingpong
+spec:
+  template:
+    spec:
+      containers:
+        - name: pingpong
+          image: sushashu/pingpong:5.07
+          ports:
+          - containerPort: 8080
+          env:
+            - name: PORT_CONTAINER
+              value: "8080"
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database-secrets
+                  key: DATABASE-PASSWORD
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: database-secrets
+                  key: DATABASE-USER
+            - name: PGHOST
+              value: 'psql-svc'
+            - name: PGPORT
+              value: '5432'

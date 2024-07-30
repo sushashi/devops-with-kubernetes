@@ -323,3 +323,28 @@
 - Mounting large volumes may add considerable overhead to the application's start up time. [Persistent Volume Warning](https://knative.dev/docs/serving/services/storage/#volume-support-for-knative-services)
 
 ## 5.08
+
+![Image](/Part5/Exercise5.08/landscape_marked.png)
+
+- **Redis** - used in Part 2 StatefulSets of the course
+- **mondoDB** - used outside of the course
+- **MySQL** - used outside of the course
+- **PostgreDB** - used in the whole course to store todos and pingpong count
+- **Spark** - used outside of the course
+- **NATS** - used in Part 4 exercise 4.06 to broadcast todos notification messages
+- **HELM** - used in Part 2 to install Prometheus
+- **ArgoCD** - used in Part 4 GitOps exercises 4.07 and 4.08
+- **GitHub Actions** - used in Part 3 Deployment Pipeline and Part 4 GitOps
+- **GitLab** - used outside of the course
+- **Kubernetes** - used in the whole course
+- **etcd** - indirectly used in the whole course, there is some link with kubernetes
+- **NGINX** - used in Part 4 in as ingress-nginx for GKE ingress and pod readiness
+- **traefik proxy** - indirectly used in the whole course, k3s uses it as an ingress controller as I understand
+- **LINKERD** - used in Part 5 service mesh
+- **Google Persistent Disk** - used in Part 3 and 4 in GKE for persistent disks
+- **Google Container Registry** - used in Part 3 deployment pipeline
+- **Google Kubernetes Engine** - used in Part 3 and 4
+- **K3S** - used in the whole course
+- **Prometheus** - used in Part 2 monitoring
+- **Grafana** - used in Part 2 monitoring to view the data
+- **Grafana Loki** - used in Part 2 monitoring to see logs
